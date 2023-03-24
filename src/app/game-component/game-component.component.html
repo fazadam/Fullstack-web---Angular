@@ -1,0 +1,48 @@
+
+<div class="game-container">
+<h1>CARD GAME</h1>
+
+<form [formGroup]="gameForm">
+
+    <h2>HAND CARDS</h2>
+    <div class="row hand">
+        <div class="col-md-2" *ngFor="let card of handCards;let i=index">
+            <div class="card">
+                <img class="card" [src]="card.picture" alt="{{ card.name }}" (click)="selectedCardToPlay(i,card.type)">
+            </div>
+        </div>
+    </div>
+
+
+    <h1>TOTAL: {{rowSumTotal}}</h1>
+
+    <h2>Melee total: {{meleeRowSum}}</h2>
+    <div class="row">
+        <div class="col-md-2" *ngFor="let card of meleeCards;">
+            <div class="card">
+                <img class="card" [src]="card.picture" alt="{{ card.name }}">
+            </div>
+        </div>
+    </div>
+
+    <h2>Ranged total: {{rangedRowSum}}</h2>
+    <div class="row">
+        <div class="col-md-2" *ngFor="let card of rangedCards;">
+            <div class="card">
+                <img class="card" [src]="card.picture" alt="{{ card.name }}">
+            </div>
+        </div>
+    </div>
+
+    <h2>Siege total: {{siegeRowSum}}</h2>
+    <div class="row">
+        <div class="col-md-2" *ngFor="let card of siegeCards;">
+            <div class="card">
+
+                <img class="card" [src]="card.picture" alt="{{ card.name }}">
+            </div>
+        </div>
+    </div>
+
+</form>
+</div>

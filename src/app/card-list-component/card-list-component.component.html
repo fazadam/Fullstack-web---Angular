@@ -1,0 +1,29 @@
+
+
+
+
+
+<!-- <div class="card-list" *ngIf="isLoggedIn()">
+  <p>Cards of {{loggedinUser}}</p>
+  <div *ngFor="let card of cards;let last">
+      <h2>{{ card.name }}</h2>
+      <h2>{{card.power}}</h2>
+      <p>{{ card.type }}</p>
+      <img [src]="card.picture" alt="{{ card.name }}" />
+    </div>
+</div> -->
+
+<label *ngIf="!isLoggedIn()">First log in to see your cards</label>
+
+<div class="row" *ngIf="isLoggedIn()">
+  <p>Cards of {{loggedinUser}}</p>
+  <div class="col-md-2" *ngFor="let card of cards">
+    <div class="card">
+      <img class="card" [src]="card.picture" alt="{{ card.name }}">
+      <div class="card-body" style="text-align: center;">
+        <h5 class="card-title">{{ card.name }}</h5>
+        <p class="card-text">{{ card.type }}</p>
+      </div>
+    </div>
+  </div>
+</div>

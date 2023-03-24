@@ -1,0 +1,33 @@
+
+/* @font-face {
+  font-family: 'Ringbearer';
+  src: url('D:/Angular/angularProjectLogin/Ringbearer Medium 500.ttf') format('truetype');
+  font-weight: 500;
+}
+
+*{
+  font-family: 'Ringbearer';
+} */
+
+div{
+    padding: 20px;
+}
+
+.affix {
+    top: 0;
+    width: 100%;
+    z-index: 9999 !important;
+  }
+
+  .affix + .container-fluid {
+    padding-top: 70px;
+  }
+
+  .navbar{
+    height: 50px;
+  }
+  .mainTitle{
+    display: flex;
+    justify-content: center;
+  }
+
