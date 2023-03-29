@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginServiceAuthService } from '../login-service-auth.service';
+import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-userprofile',
@@ -9,7 +11,7 @@ import { LoginServiceAuthService } from '../login-service-auth.service';
 })
 export class UserprofileComponent implements OnInit {
 
-  constructor(private loginService: LoginServiceAuthService, private formbuilder: FormBuilder) {
+  constructor(private loginService: LoginServiceAuthService, private formbuilder: FormBuilder, private router: Router, private appComponent:AppComponent) {
   }
 
   profilData: any;
@@ -73,16 +75,16 @@ if (this.userForm.valid) {
   
     if (this.userForm.get('password')?.dirty) {
       this.loginService.updateProfilePassword(localStorage.getItem('loggedInUser')??'', user.password)
-      .subscribe({next:() => {
+      .subscribe({next:(data) => {
         localStorage.setItem('loggedInUser', user.username);
- 
-        this.loginService.login(user)
-          .subscribe({next: () => {
-            localStorage.setItem('loggedInUser', user.username);
-            console.log(localStorage.getItem('loggedInUser'));
-          },
-        error: error => console.log(error)
-        });
+
+        // this.loginService.login(user)
+        //   .subscribe({next: (data) => {
+        //     localStorage.setItem('loggedInUser', user.username);
+        //     console.log(localStorage.getItem('loggedInUser'));
+        //   },
+        // error: error => console.log(error)
+        // });
       },
       error:error=>console.log(error)
     });
@@ -95,17 +97,18 @@ if (this.userForm.valid) {
         localStorage.setItem('loggedInUser', user.username);
 
 
-        this.loginService.login(user)
-          .subscribe({next: (data) => {
-            localStorage.setItem('loggedInUser', user.username);
-            console.log(localStorage.getItem('loggedInUser'));
-          },
-        error: error => console.log(error)
-        });
+        // this.loginService.login(user)
+        //   .subscribe({next: (data) => {
+        //     localStorage.setItem('loggedInUser', user.username);
+        //     console.log(localStorage.getItem('loggedInUser'));
+        //   },
+        // error: error => console.log(error)
+        // });
       },
       error:error=>console.log(error)
     });
     }
+    this.appComponent.onLogout();
   }
 
     // this.loginService.updateProfile(localStorage.getItem('loggedInUser') ?? '', user)

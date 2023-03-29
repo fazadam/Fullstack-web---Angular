@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
@@ -12,6 +12,9 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent {
 
 constructor(private router:Router, private http: HttpClient){}
+
+
+@Output() logoutEvent = new EventEmitter();
 
 
 isLoggedIn(): boolean {
@@ -52,6 +55,7 @@ showGame(){
 onLogout(){
   localStorage.removeItem('loggedInUser');
   console.log(localStorage.getItem('loggedInUser'));
-  this.router.navigate(['/login'])
+  this.router.navigate(['/login']);
+  // this.logoutEvent.emit();
 }
 }

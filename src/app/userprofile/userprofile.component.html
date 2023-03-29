@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 mx-auto mt-5">
-      <form [formGroup]="userForm" (ngSubmit)="onUpdateUserProfile()">
+      <form [formGroup]="userForm">
         <div class="form-group">
           <label for="username">Username :</label>
           <input type="username" name="username" id="username" class="form-control" formControlName="username">
@@ -14,10 +14,10 @@
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" id="password" class="form-control" placeholder="******">
+          <input type="password" id="password" class="form-control" formControlName="password">
 
 
-          <div *ngIf="userForm.get('email')?.invalid&& userForm.get('password')?.touched || userForm.get('password')?.dirty">
+          <div *ngIf="userForm.get('password')?.invalid&& userForm.get('password')?.touched || userForm.get('password')?.dirty">
             <small class="text-danger" *ngIf="userForm.get('password')?.hasError('required')">PASSWORD IS REQUIRED</small>
             <small class="text-danger" *ngIf="userForm.get('password')?.hasError('minlength')">PASSWORD MUST BE AT LEAST 8 CHARACTERS LONG</small><br>
             <small class="text-danger" *ngIf="userForm.get('password')?.hasError('pattern')">PASSOWRD MUST CONTAIN AT LEAST ONE UPPERCASE LETTER,ONE LOWERCASE LETTER, ONE NUMBER AND ONEN SPECIAL CHARACTER (@#$%^&+=!)</small>
@@ -38,7 +38,7 @@
 
         <div class="buttons">
           <button class="btn btn-primary" id="editButton" (click)="showUpdateForm()">Edit</button>
-          <button class="btn btn-primary" id="saveButton" type="submit" [disabled]="userForm.disabled" >Save</button>
+          <button class="btn btn-primary" id="saveButton" type="submit" [disabled]="userForm.disabled" (click)="onUpdateUserProfile()">Save</button>
         </div>
       </form>
     </div>
