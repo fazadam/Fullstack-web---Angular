@@ -9,25 +9,37 @@
   font-family: 'Ringbearer';
 } */
 
-div{
-    padding: 20px;
-}
 
 .affix {
-    top: 0;
-    width: 100%;
-    z-index: 9999 !important;
-  }
+  top: 0;
+  width: 100%;
+  z-index: 9999 !important;
+}
 
-  .affix + .container-fluid {
-    padding-top: 70px;
-  }
+.affix + .container-fluid {
+  padding-top: 70px;
+}
 
-  .navbar{
-    height: 50px;
-  }
-  .mainTitle{
-    display: flex;
-    justify-content: center;
-  }
+.navbar{
+  height: 50px;
+}
+.mainTitle{
+  display: flex;
+  justify-content: center;
+}
+
+
+
+.header-image{
+padding-top:50px;
+padding-left: 100px;
+padding-right: 100px;
+padding-bottom: 50px;
+}
+
+.nav-link{
+color:antiquewhite;
+font-weight: bold;
+text-decoration: underline;
+}
 

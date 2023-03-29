@@ -1,0 +1,98 @@
+
+.container-fluid{
+    border: 2px solid black;
+      }
+    
+      /* .container{
+        border: 3px dotted blue;
+      }
+    
+      div{
+        border: 3px solid black;
+    
+      } */
+    
+      main{
+        margin: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    
+      #carousel{
+        margin-top: 10px;
+        height: auto;
+        width: 100%;
+    
+      }
+    
+    img{height:400px;border-radius: 20px;
+    }
+    
+    
+    
+    .card{
+        border-radius: 20px;
+    }
+    
+    .card-img-top{
+        border-radius: 20px 20px 0 0 ;
+    }
+    
+    .card-body{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    #sidebar {
+        position: fixed;
+        top: 250px;
+        left: 0;
+        width: auto;
+        padding: 20px;
+    
+    }
+    
+    
+    #sidebar.affix {
+        position: relative;
+        top: 0;
+    }
+    
+    
+    #carousel, .card,.dropdown-item{
+      cursor: pointer;
+    }
+    
+    
+    #homePage{
+      position: relative;
+      z-index: 1;
+    }
+    
+    #homePage::after {
+    content: "";
+    position: absolute;
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%;  
+    opacity: .4; 
+    z-index: -1;
+    background-image: url('https://wallpaperaccess.com/full/808718.jpg');
+    background-size: 100% 100%;
+    background-repeat:no-repeat;
+    background-position: center center;
+    }
+    
+    
+    
+    .nav-link,.dropdown-item{
+      color:antiquewhite;
+    }
+    
+    .nav-link{
+      font-weight: bold;
+      text-decoration: underline;
+    }

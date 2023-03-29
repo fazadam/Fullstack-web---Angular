@@ -73,11 +73,11 @@ if (this.userForm.valid) {
   
     if (this.userForm.get('password')?.dirty) {
       this.loginService.updateProfilePassword(localStorage.getItem('loggedInUser')??'', user.password)
-      .subscribe({next:(data) => {
+      .subscribe({next:() => {
         localStorage.setItem('loggedInUser', user.username);
  
         this.loginService.login(user)
-          .subscribe({next: (data) => {
+          .subscribe({next: () => {
             localStorage.setItem('loggedInUser', user.username);
             console.log(localStorage.getItem('loggedInUser'));
           },

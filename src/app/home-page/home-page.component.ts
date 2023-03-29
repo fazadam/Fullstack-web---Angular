@@ -8,4 +8,7 @@ import { LoginServiceAuthService } from '../login-service-auth.service';
 })
 export class HomePageComponent {
 
+  selectedCharacter: string = '';
+
+
 }
