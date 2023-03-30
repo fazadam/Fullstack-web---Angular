@@ -22,6 +22,22 @@ export class LoginServiceAuthService {
     return this.http.get<any>(`${this.url}/profile/${username}`);
   }
 
+
+  setFavouriteVideos(username: string, favouriteVideos: string){
+    return this.http.put(`${this.url}/${username}/setfavoriteVideos`,favouriteVideos);
+  }
+
+  getFavouriteVideos(username: string){
+    return this.http.get<string[]>(`${this.url}/${username}/getfavoriteVideos`);
+  }
+
+  deleteFavouriteVideos(username: string, favouriteVideos: string){
+    return this.http.put(`${this.url}/${username}/deletefavoriteVideos`,favouriteVideos);
+  }
+
+
+
+
   updateProfile(username: string, user:any) {
     console.log(user );
     return this.http.put<string>(`${this.url}/profile/${username}/updateProfile`,user);

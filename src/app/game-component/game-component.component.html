@@ -1,5 +1,5 @@
 
-<div class="game-container">
+<div class="container-fluid">
 <h1>CARD GAME</h1>
 
 <form [formGroup]="gameForm">
@@ -8,10 +8,12 @@
     <div class="row hand">
         <div class="col-md-2" *ngFor="let card of handCards;let i=index">
             <div class="card">
-                <img class="card" [src]="card.picture" alt="{{ card.name }}" (click)="selectedCardToPlay(i,card.type)">
+                <img class="card-img-top" [src]="card.picture" alt="{{ card.name }}" (click)="selectedCardToPlay(i,card.type)">
             </div>
         </div>
     </div>
+
+    
 
 
     <h1>TOTAL: {{rowSumTotal}}</h1>
@@ -20,7 +22,7 @@
     <div class="row">
         <div class="col-md-2" *ngFor="let card of meleeCards;">
             <div class="card">
-                <img class="card" [src]="card.picture" alt="{{ card.name }}">
+                <img class="card-img-top" [src]="card.picture" alt="{{ card.name }}">
             </div>
         </div>
     </div>
@@ -29,7 +31,7 @@
     <div class="row">
         <div class="col-md-2" *ngFor="let card of rangedCards;">
             <div class="card">
-                <img class="card" [src]="card.picture" alt="{{ card.name }}">
+                <img class="card-img-top" [src]="card.picture" alt="{{ card.name }}">
             </div>
         </div>
     </div>
@@ -39,7 +41,7 @@
         <div class="col-md-2" *ngFor="let card of siegeCards;">
             <div class="card">
 
-                <img class="card" [src]="card.picture" alt="{{ card.name }}">
+                <img class="card-img-top" [src]="card.picture" alt="{{ card.name }}">
             </div>
         </div>
     </div>

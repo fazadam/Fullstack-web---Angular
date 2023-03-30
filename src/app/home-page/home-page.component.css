@@ -29,10 +29,10 @@
     img{height:400px;border-radius: 20px;
     }
     
-    
-    
+
     .card{
         border-radius: 20px;
+        height: auto;
     }
     
     .card-img-top{
@@ -54,6 +54,7 @@
     
     }
     
+ 
     
     #sidebar.affix {
         position: relative;
@@ -90,9 +91,20 @@
     
     .nav-link,.dropdown-item{
       color:antiquewhite;
+      
     }
-    
+    .nav-link:hover,.dropdown-item:hover{
+      background-color: white;
+      color: black;
+    }
+
     .nav-link{
       font-weight: bold;
       text-decoration: underline;
     }
+    
+.card:hover{
+    transform: scale(1.1);
+    transition: 0.5s
+}
+

@@ -10,6 +10,7 @@ import { AppComponent } from '../app.component';
   styleUrls: ['./userprofile.component.css']
 })
 export class UserprofileComponent implements OnInit {
+  errorMessage: string = '';
 
   constructor(private loginService: LoginServiceAuthService, private formbuilder: FormBuilder, private router: Router, private appComponent:AppComponent) {
   }
@@ -66,17 +67,23 @@ if (this.userForm.valid) {
       this.loginService.updateProfileEmail(localStorage.getItem('loggedInUser')??'', user.email)
       .subscribe({next:(data) => {
         
-        console.log("user updated: " + data);
-        localStorage.setItem('loggedInUser', user.username);
-        console.log(localStorage.getItem('loggedInUser'));
+        console.log(' email sub belseje')
+        // console.log("user updated: " + data);
+        // localStorage.setItem('loggedInUser', user.username);
+        // console.log(localStorage.getItem('loggedInUser'));
         
-      }});
+      },
+    error:(error)=>{
+      console.log('email error belseje:');
+      console.log(this.errorMessage);
+      this.errorMessage = error.error;
+    }});
     }
   
     if (this.userForm.get('password')?.dirty) {
       this.loginService.updateProfilePassword(localStorage.getItem('loggedInUser')??'', user.password)
       .subscribe({next:(data) => {
-        localStorage.setItem('loggedInUser', user.username);
+        //localStorage.setItem('loggedInUser', user.username);
 
         // this.loginService.login(user)
         //   .subscribe({next: (data) => {
@@ -86,8 +93,11 @@ if (this.userForm.valid) {
         // error: error => console.log(error)
         // });
       },
-      error:error=>console.log(error)
-    });
+      error:(error)=>{
+        console.log('password error belseje:');
+        console.log(this.errorMessage);
+        this.errorMessage = error.error;
+      }});
     }
 
     if (this.userForm.get('username')?.dirty) {
@@ -105,10 +115,13 @@ if (this.userForm.valid) {
         // error: error => console.log(error)
         // });
       },
-      error:error=>console.log(error)
-    });
+      error:(error)=>{
+        console.log('email error belseje:');
+        console.log(this.errorMessage);
+        this.errorMessage = error.error;
+      }});
     }
-    this.appComponent.onLogout();
+    // this.appComponent.onLogout();
   }
 
     // this.loginService.updateProfile(localStorage.getItem('loggedInUser') ?? '', user)

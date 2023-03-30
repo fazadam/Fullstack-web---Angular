@@ -11,6 +11,8 @@ import { LoginServiceAuthService } from '../login-service-auth.service';
 })
 export class LoginComponentComponent implements OnInit {
 
+  errorMessage: string = '';
+
   ngOnInit(): void {
 
   }
@@ -36,7 +38,11 @@ export class LoginComponentComponent implements OnInit {
             console.log(localStorage.getItem('loggedInUser'));
             this.router.navigate(['/home']);
           },
-          error: error => error.statuesText
+          error: (error) => {
+            console.log('email error belseje:');
+            console.log(this.errorMessage);
+            this.errorMessage = error.error;
+          }
         })
     }
   }

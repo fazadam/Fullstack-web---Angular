@@ -1,6 +1,9 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-login">
     <h2 class="form-login-heading">Login Form</h2>
 
+
+    <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
+
     <label for="">Username</label>
     <input type="text" formControlName="username" class="form-control" placeholder="Username" />
 

@@ -4,3 +4,33 @@
     justify-content: center;
     align-items: center;
 }
+
+#usercards{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.card{
+    height: fit-content;
+    margin-top: 10px;
+}
+
+.card:hover{
+    transform: scale(1.1);
+    transition: 0.5s
+}
+
+.card-img-top{
+    margin-top: 0;
+    height: 400px;
+}
+
+.container-fluid{
+    background-image: url('https://img.freepik.com/free-photo/wooden-background_24972-623.jpg');
+    background-size: 100% 100%;
+    background-repeat:no-repeat;
+    background-position: center center;
+}
+

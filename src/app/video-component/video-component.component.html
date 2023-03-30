@@ -1,0 +1,112 @@
+<p>video-component works!</p>
+<button (click)="showOnlyFavorites()">Favorites</button>
+<div *ngIf="errorMsg">{{errorMsg}}</div>
+
+<div class="container">
+<div class="favorite-videos" *ngIf="showOnlyFavoritesBool">
+    <h2>Favorite Videos</h2>
+    <div class="row">
+      <div class="col-md-3 mb-4" *ngFor="let favorite of favoriteVideos">
+        <iframe width="100%" height="auto" [src]="getVideoUrl(favorite)" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <button (click)="removeFromFavoritVideos(favorite)">Remove from Favorites</button>
+      </div>
+    </div>
+  </div>
+</div>
+<h2>Podcasts</h2>
+<div class="container" id="podcasts" *ngIf="!showOnlyFavoritesBool">
+    <div class="row" id="allVideos">
+        <div class="col-md-3 mb-4">
+            <iframe width="100%" height="auto" src="https://www.youtube.com/embed/OAolKXDuM2Y" frameborder="0"
+                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <button (click)="addToFavorites('https://www.youtube.com/embed/OAolKXDuM2Y')">Add to Favorites</button>
+        </div>
+        <div class="col-md-3 mb-4">
+            <iframe width="100%" height="auto" src="https://www.youtube.com/embed/1al7QzS916g"
+                title="#4 Szilmarilok - Valinor és a tündék" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+            <button (click)="addToFavorites('https://www.youtube.com/embed/1al7QzS916g')">Add to Favorites</button>
+
+        </div>
+        <div class="col-md-3 mb-4">
+            <iframe width="100%" height="auto" src="https://www.youtube.com/embed/CI-u00U1MzI"
+                title="#6 Szilmarilok - Valinor homályba borulta" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+            <button (click)="addToFavorites('https://www.youtube.com/embed/CI-u00U1MzI')">Add to Favorites</button>
+
+        </div>
+        <div class="col-md-3 mb-4">
+            <iframe width="100%" height="auto" src="https://www.youtube.com/embed/jO_747Ov038"
+                title="#8 Szilmarilok - Beleriand birodalmai" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+            <button (click)="addToFavorites('https://www.youtube.com/embed/jO_747Ov038')">Add to Favorites</button>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 mb-4">
+            <iframe width="100%" height="auto" src="https://www.youtube.com/embed/VIDEO_ID_5" frameborder="0"
+                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="col-md-3 mb-4">
+            <iframe width="100%" height="auto" src="https://www.youtube.com/embed/VIDEO_ID_6" frameborder="0"
+                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="col-md-3 mb-4">
+            <iframe width="100%" height="auto" src="https://www.youtube.com/embed/VIDEO_ID_7" frameborder="0"
+                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="col-md-3 mb-4">
+            <iframe width="100%" height="auto" src="https://www.youtube.com/embed/VIDEO_ID_8" frameborder="0"
+                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+<h2>Videos</h2>
+<div class="container" id="videos" *ngIf="!showOnlyFavoritesBool">
+    <div class="row">
+        <div class="col-md-6 mb-6">
+            <iframe width="100%" height="auto" src="https://www.youtube.com/embed/VIDEO_ID_1" frameborder="0"
+                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="col-md-6 mb-6">
+            <iframe width="100%" height="auto" src="https://www.youtube.com/embed/VIDEO_ID_2" frameborder="0"
+                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="col-md-6 mb-6">
+            <iframe width="100%" height="auto" src="https://www.youtube.com/embed/VIDEO_ID_3" frameborder="0"
+                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="col-md-6 mb-6">
+            <iframe width="100%" height="auto" src="https://www.youtube.com/embed/VIDEO_ID_4" frameborder="0"
+                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-6">
+            <iframe width="100%" height="auto" src="https://www.youtube.com/embed/VIDEO_ID_1" frameborder="0"
+                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="col-md-6 mb-6">
+            <iframe width="100%" height="auto" src="https://www.youtube.com/embed/VIDEO_ID_2" frameborder="0"
+                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="col-md-6 mb-6">
+            <iframe width="100%" height="auto" src="https://www.youtube.com/embed/VIDEO_ID_3" frameborder="0"
+                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="col-md-6 mb-6">
+            <iframe width="100%" height="auto" src="https://www.youtube.com/embed/VIDEO_ID_4" frameborder="0"
+                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </div>
+    <!-- add more rows as needed -->
+</div>

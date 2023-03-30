@@ -25,6 +25,7 @@ isLoggedIn(): boolean {
   ngOnInit(): void {
     this.cardService.getUserCards(this.loggedinUser).subscribe(cards => {
         this.cards = cards;
+        console.log('cards'+ cards)
         this.cards.forEach(card => {
           card.picture = 'data:image/png;base64,' + card.picture;
         });

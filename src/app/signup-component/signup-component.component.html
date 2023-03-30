@@ -3,6 +3,8 @@
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="form-signup">
     <h2 class="form-signup-heading">Registration Form</h2>
   
+    <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
+
 
 <div class="form-group">
   <label for="">Username</label>
@@ -13,6 +15,7 @@
     <small class="text-danger" *ngIf="registrationForm.get('username')?.hasError('minlength')">USERNAME MUST BE AT LEAST 6 CHAR.</small>
   </div>
 </div>
+
 
 
     <label for="">Email</label>
