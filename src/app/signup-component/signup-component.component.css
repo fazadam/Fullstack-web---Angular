@@ -1,3 +1,90 @@
-button{
-    margin-top: 15px;
-}
+
+@font-face {
+    font-family: 'Ringbearer';
+    src: url('Ringbearer Medium 500.ttf') format('truetype');
+    font-weight: 500;
+  }
+  
+  *{
+    font-family: 'Ringbearer';
+  } 
+  
+  body{
+    display: flex;
+    height: 100%;
+    background: url("src/7969248.jpg") no-repeat;
+    background-position: center;
+    overflow: auto;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    align-items: start;
+    justify-content: center;
+  }
+  h1{
+    font-size: 80px;
+  }
+  
+    .container{
+      display: flex;
+  
+      border-radius: 50px;
+      width: fit-content;
+      height: fit-content;
+      align-items: center;
+      justify-content: center;
+      margin-top: 30px;
+     color:rgba(249,255,251,255);
+    }
+  
+    .singupForm{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        font-size: 30px;
+        margin-top: 15px;
+        color: rgba(250, 242, 255, 255);
+
+    }
+
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 70%;
+
+      }
+
+    input{
+   font-size: 25px;
+   margin-top: 5px;
+   margin-bottom: 20px;
+    }
+  
+  
+    button{
+      margin-top: 10px;
+      font-size: 25px;
+      color:rgba(222,241,253,255);
+      border-color:   rgba(33,110,156,255);
+      background-color:rgba(33,110,156,255) ;
+  ;
+    }
+
+    .btn:hover{
+        background-color:rgba(23,23,35,255);
+        border-color:rgba(23,23,35,255);
+    
+    }
+
+    .btn:active{
+        border-color:   rgba(33,110,156,255);
+        background-color:rgba(33,110,156,255) ;
+      }
+      
+      
+
+  

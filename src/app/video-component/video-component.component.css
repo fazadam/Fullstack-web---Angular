@@ -1,0 +1,8 @@
+body{
+    background-image: url('https://static1.moviewebimages.com/wordpress/wp-content/uploads/2023/02/children-of-hurin-tolkien.jpg') ;
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    overflow: hidden;
+}

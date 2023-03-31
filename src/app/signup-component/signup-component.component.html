@@ -1,41 +1,59 @@
+<html>
 
+<body>
 
-  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="form-signup">
-    <h2 class="form-signup-heading">Registration Form</h2>
-  
+<div class="container">
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="singupForm">
+    <h1 class="form-signup-heading">Registration</h1>
+
     <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
 
 
-<div class="form-group">
-  <label for="">Username</label>
-  <input type="text" formControlName="username" class="form-control" placeholder="Username" />
+    <div class="form-group">
+      <label for="">Username</label>
+      <input type="text" formControlName="username" class="form-control" placeholder="Username" />
 
-  <div *ngIf="registrationForm.get('username')?.invalid && registrationForm.get('username')?.touched">
-    <small class="text-danger" *ngIf="registrationForm.get('username')?.hasError('required')">USERNAME IS REQUIRED!</small>
-    <small class="text-danger" *ngIf="registrationForm.get('username')?.hasError('minlength')">USERNAME MUST BE AT LEAST 6 CHAR.</small>
-  </div>
-</div>
+      <div *ngIf="registrationForm.get('username')?.invalid && registrationForm.get('username')?.touched">
+        <small class="text-danger" *ngIf="registrationForm.get('username')?.hasError('required')">USERNAME IS
+          REQUIRED!</small>
+        <small class="text-danger" *ngIf="registrationForm.get('username')?.hasError('minlength')">USERNAME MUST BE AT
+          LEAST 6 CHAR.</small>
+      </div>
+    </div>
 
 
+    <div class="form-group">
 
     <label for="">Email</label>
     <input type="text" formControlName="email" class="form-control" placeholder="email" />
 
     <div *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
       <small class="text-danger" *ngIf="registrationForm.get('email')?.hasError('required')">EMAIL IS REQUIRED</small>
-      <small class="text-danger" *ngIf="registrationForm.get('email')?.hasError('email')">PLEASE ENTER A VALID EMAIL</small>
+      <small class="text-danger" *ngIf="registrationForm.get('email')?.hasError('email')">PLEASE ENTER A VALID
+        EMAIL</small>
     </div>
+  </div>
 
-    
-  
+
+
+  <div class="form-group">
+
     <label for="">Password</label>
     <input type="password" formControlName="password" class="form-control" placeholder="Jelszó" />
 
     <div *ngIf=" registrationForm.get('password')?.touched">
-      <small class="text-danger" *ngIf="registrationForm.get('password')?.hasError('required')">PASSWORD IS REQUIRED</small>
-      <small class="text-danger" *ngIf="registrationForm.get('password')?.hasError('minlength')">PASSWORD MUST BE AT LEAST 8 CHARACTERS LONG</small><br>
-      <small class="text-danger" *ngIf="registrationForm.get('password')?.hasError('pattern')">PASSOWRD MUST CONTAIN AT LEAST ONE UPPERCASE LETTER,ONE LOWERCASE LETTER, ONE NUMBER AND ONEN SPECIAL CHARACTER (@#$%^&+=!)</small>
+      <small class="text-danger" *ngIf="registrationForm.get('password')?.hasError('required')">PASSWORD IS
+        REQUIRED</small>
+      <small class="text-danger" *ngIf="registrationForm.get('password')?.hasError('minlength')">PASSWORD MUST BE AT
+        LEAST 8 CHARACTERS LONG</small><br>
+      <small class="text-danger" *ngIf="registrationForm.get('password')?.hasError('pattern')">PASSOWRD MUST CONTAIN AT
+        LEAST ONE UPPERCASE LETTER,ONE LOWERCASE LETTER, ONE NUMBER AND ONEN SPECIAL CHARACTER (@#$%^&+=!)</small>
     </div>
+  </div>
 
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Regisztráció</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
   </form>
+</div>
+</body>
+
+</html>

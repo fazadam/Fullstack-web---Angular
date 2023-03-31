@@ -1,7 +1,15 @@
 
-.container-fluid{
-    border: 2px solid black;
-      }
+@font-face {
+  font-family: 'Ringbearer';
+  src: url('Ringbearer Medium 500.ttf') format('truetype');
+  font-weight: 500;
+}
+
+*{
+  font-family: 'Ringbearer';
+} 
+
+
     
       /* .container{
         border: 3px dotted blue;
@@ -67,7 +75,7 @@
     }
     
     
-    #homePage{
+    /* #homePage{
       position: relative;
       z-index: 1;
     }
@@ -86,8 +94,23 @@
     background-repeat:no-repeat;
     background-position: center center;
     }
+     */
     
-    
+ 
+
+     body{
+      display: flex;
+      height: 100%;
+      background: url("https://wallpaperaccess.com/full/808718.jpg") no-repeat;
+      background-position: center;
+      overflow: auto;
+      background-size: cover;
+      width: 100%;
+      height: 100vh;
+      align-items: start;
+      justify-content: center;
+
+     }
     
     .nav-link,.dropdown-item{
       color:antiquewhite;

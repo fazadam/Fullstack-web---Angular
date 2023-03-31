@@ -1,52 +1,61 @@
-<div class="container-fluid">
-  <div class="col-md-3 mx-auto mt-5" id="dataDiv">
-    <form [formGroup]="userForm">
-      <div class="form-group">
-        <label for="username">Username :</label>
-        <input type="username" name="username" id="username" class="form-control" formControlName="username">
+<body>
 
-        <div
-          *ngIf="userForm.get('username')?.invalid && userForm.get('username')?.dirty || userForm.get('username')?.touched">
-          <small class="text-danger" *ngIf="userForm.get('username')?.hasError('required')">USERNAME IS
-            REQUIRED!</small>
-          <small class="text-danger" *ngIf="userForm.get('username')?.hasError('minlength')">USERNAME MUST BE AT LEAST 6
-            CHAR.</small>
+
+  <div class="container-fluid">
+    <div class="col-md-3 mx-auto mt-5" id="dataDiv">
+      <form [formGroup]="userForm">
+        <div class="form-group">
+          <label for="username">Username :</label>
+          <input type="username" name="username" id="username" class="form-control" formControlName="username">
+
+          <div
+            *ngIf="userForm.get('username')?.invalid && userForm.get('username')?.dirty || userForm.get('username')?.touched">
+            <small class="text-danger" *ngIf="userForm.get('username')?.hasError('required')">USERNAME IS
+              REQUIRED!</small>
+            <small class="text-danger" *ngIf="userForm.get('username')?.hasError('minlength')">USERNAME MUST BE AT LEAST
+              6
+              CHAR.</small>
+          </div>
+
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" class="form-control" formControlName="password">
+
+
+          <div
+            *ngIf="userForm.get('password')?.invalid&& userForm.get('password')?.touched || userForm.get('password')?.dirty">
+            <small class="text-danger" *ngIf="userForm.get('password')?.hasError('required')">PASSWORD IS
+              REQUIRED</small>
+            <small class="text-danger" *ngIf="userForm.get('password')?.hasError('minlength')">PASSWORD MUST BE AT LEAST
+              8
+              CHARACTERS LONG</small><br>
+            <small class="text-danger" *ngIf="userForm.get('password')?.hasError('pattern')">PASSOWRD MUST CONTAIN AT
+              LEAST ONE UPPERCASE LETTER,ONE LOWERCASE LETTER, ONE NUMBER AND ONEN SPECIAL CHARACTER (@#$%^&+=!)</small>
+          </div>
         </div>
 
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" class="form-control" formControlName="password">
+        <div class="form-group">
+          <label for="email">Email :</label>
+          <input type="email" name="email" id="email" class="form-control" formControlName="email">
 
 
-        <div
-          *ngIf="userForm.get('password')?.invalid&& userForm.get('password')?.touched || userForm.get('password')?.dirty">
-          <small class="text-danger" *ngIf="userForm.get('password')?.hasError('required')">PASSWORD IS REQUIRED</small>
-          <small class="text-danger" *ngIf="userForm.get('password')?.hasError('minlength')">PASSWORD MUST BE AT LEAST 8
-            CHARACTERS LONG</small><br>
-          <small class="text-danger" *ngIf="userForm.get('password')?.hasError('pattern')">PASSOWRD MUST CONTAIN AT
-            LEAST ONE UPPERCASE LETTER,ONE LOWERCASE LETTER, ONE NUMBER AND ONEN SPECIAL CHARACTER (@#$%^&+=!)</small>
+          <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched || userForm.get('email')?.dirty">
+            <small class="text-danger" *ngIf="userForm.get('email')?.hasError('required')">EMAIL IS REQUIRED</small>
+            <small class="text-danger" *ngIf="userForm.get('email')?.hasError('email')">PLEASE ENTER A VALID
+              EMAIL</small>
+          </div>
         </div>
-      </div>
 
-      <div class="form-group">
-        <label for="email">Email :</label>
-        <input type="email" name="email" id="email" class="form-control" formControlName="email">
+        <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
 
-
-        <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched || userForm.get('email')?.dirty">
-          <small class="text-danger" *ngIf="userForm.get('email')?.hasError('required')">EMAIL IS REQUIRED</small>
-          <small class="text-danger" *ngIf="userForm.get('email')?.hasError('email')">PLEASE ENTER A VALID EMAIL</small>
+        <div class="buttons">
+          <button class="btn btn-primary" id="editButton" (click)="showUpdateForm()">Edit</button>
+          <button class="btn btn-primary" id="saveButton" type="submit" [disabled]="userForm.disabled"
+            (click)="onUpdateUserProfile()">Save</button>
         </div>
-      </div>
-
-      <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
-
-      <div class="buttons">
-        <button class="btn btn-primary" id="editButton" (click)="showUpdateForm()">Edit</button>
-        <button class="btn btn-primary" id="saveButton" type="submit" [disabled]="userForm.disabled"
-          (click)="onUpdateUserProfile()">Save</button>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
-</div>
+
+</body>

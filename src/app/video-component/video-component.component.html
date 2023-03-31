@@ -1,17 +1,20 @@
-<p>video-component works!</p>
-<button (click)="showOnlyFavorites()">Favorites</button>
+<body>
+    
+
+<button (click)="showOnlyFavorites()">Favorite videos</button>
 <div *ngIf="errorMsg">{{errorMsg}}</div>
 
 <div class="container">
-<div class="favorite-videos" *ngIf="showOnlyFavoritesBool">
-    <h2>Favorite Videos</h2>
-    <div class="row">
-      <div class="col-md-3 mb-4" *ngFor="let favorite of favoriteVideos">
-        <iframe width="100%" height="auto" [src]="getVideoUrl(favorite)" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        <button (click)="removeFromFavoritVideos(favorite)">Remove from Favorites</button>
-      </div>
+    <div class="favorite-videos" *ngIf="showOnlyFavoritesBool">
+        <h2>Favorite Videos</h2>
+        <div class="row">
+            <div class="col-md-3 mb-4" *ngFor="let favorite of favoriteVideos">
+                <iframe width="100%" height="auto" [src]="getVideoUrl(favorite)" allow="autoplay; encrypted-media"
+                    allowfullscreen></iframe>
+                <button (click)="removeFromFavoritVideos(favorite)">Remove from Favorites</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <h2>Podcasts</h2>
 <div class="container" id="podcasts" *ngIf="!showOnlyFavoritesBool">
@@ -48,20 +51,75 @@
     </div>
     <div class="row">
         <div class="col-md-3 mb-4">
-            <iframe width="100%" height="auto" src="https://www.youtube.com/embed/VIDEO_ID_5" frameborder="0"
-                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+            <iframe width="100%" height="auto"
+                src="https://www.youtube.com/embed/w7idpcWKTVw?list=PLr0Kumg0jLgWjLiHDXDtPYrkG5N4FD2rq"
+                title="#10 Szilmarilok - A Váratlan Láng Csatája" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+            <button
+                (click)="addToFavorites('https://www.youtube.com/embed/w7idpcWKTVw?list=PLr0Kumg0jLgWjLiHDXDtPYrkG5N4FD2rq')">Add
+                to Favorites</button>
+
         </div>
         <div class="col-md-3 mb-4">
-            <iframe width="100%" height="auto" src="https://www.youtube.com/embed/VIDEO_ID_6" frameborder="0"
-                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <iframe width="100%" height="auto"
+                src="https://www.youtube.com/embed/kiPszENLMvo?list=PLr0Kumg0jLgWjLiHDXDtPYrkG5N4FD2rq"
+                title="#11 Szilmarilok - Beren és Lúthien története" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+            <button
+                (click)="addToFavorites('https://www.youtube.com/embed/kiPszENLMvo?list=PLr0Kumg0jLgWjLiHDXDtPYrkG5N4FD2rq')">Add
+                to Favorites</button>
+
         </div>
         <div class="col-md-3 mb-4">
-            <iframe width="100%" height="auto" src="https://www.youtube.com/embed/VIDEO_ID_7" frameborder="0"
-                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <iframe width="100%" height="auto"
+                src="https://www.youtube.com/embed/l3xm8hFeIJA?list=PLr0Kumg0jLgWjLiHDXDtPYrkG5N4FD2rq"
+                title="#12 Szilmarilok - Húrin gyermekei I. rész" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+            <button
+                (click)="addToFavorites('https://www.youtube.com/embed/l3xm8hFeIJA?list=PLr0Kumg0jLgWjLiHDXDtPYrkG5N4FD2rq')">Add
+                to Favorites</button>
+
         </div>
         <div class="col-md-3 mb-4">
-            <iframe width="100%" height="auto" src="https://www.youtube.com/embed/VIDEO_ID_8" frameborder="0"
-                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+            <iframe width="100%" height="auto"
+                src="https://www.youtube.com/embed/R0xl4VmmPpY?list=PLr0Kumg0jLgWjLiHDXDtPYrkG5N4FD2rq"
+                title="#13 Szilmarilok - Húrin gyermekei II. rész" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+            <button
+                (click)="addToFavorites('https://www.youtube.com/embed/R0xl4VmmPpY?list=PLr0Kumg0jLgWjLiHDXDtPYrkG5N4FD2rq')">Add
+                to Favorites</button>
+
+        </div>
+
+        <div class="col-md-3 mb-4">
+
+            <iframe width="100%" height="auto"
+                src="https://www.youtube.com/embed/KBjbMymgeOY?list=PLr0Kumg0jLgWjLiHDXDtPYrkG5N4FD2rq"
+                title="#14 Szilmarilok - Morgoth bukása" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe> <button
+                (click)="addToFavorites('https://www.youtube.com/embed/KBjbMymgeOY?list=PLr0Kumg0jLgWjLiHDXDtPYrkG5N4FD2rq')">Add
+                to Favorites</button>
+           
+
+        </div>
+
+        <div class="col-md-3 mb-4">
+
+            <iframe width="100%" height="auto"
+                src="https://www.youtube.com/embed/B_idMDzANA8?list=PLr0Kumg0jLgWjLiHDXDtPYrkG5N4FD2rq"
+                title="#15 Szilmarilok - Númenor és a Másodkor teljes története" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe> <button
+                (click)="addToFavorites('https://www.youtube.com/embed/B_idMDzANA8?list=PLr0Kumg0jLgWjLiHDXDtPYrkG5N4FD2rq')">Add
+                to Favorites</button>
+            
         </div>
     </div>
 
@@ -110,3 +168,5 @@
     </div>
     <!-- add more rows as needed -->
 </div>
+
+</body>

@@ -1,16 +1,25 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-login">
-    <h2 class="form-login-heading">Login Form</h2>
+<html>
+  <body>
+    
+
+<div class="container">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="loginForm">
+    <h1 class="form-login-heading">Login</h1>
 
 
-    <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
 
     <label for="">Username</label>
     <input type="text" formControlName="username" class="form-control" placeholder="Username" />
 
     <label for="">Password</label>
     <input type="password" formControlName="password" class="form-control" placeholder="Jelszó" />
-    
+    <div *ngIf="errorMessage" class="text text-danger" id="error">{{errorMessage}}</div>
+
     <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
     
   </form>
+</div>
+</body>
+
+</html>
   

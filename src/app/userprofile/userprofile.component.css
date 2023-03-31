@@ -9,27 +9,17 @@
     margin: 5px;
 }
 
-html, body {
+.container-fluid {
+    margin: 0;
+    padding: 0;
+  }
+
+  body{
     height: 100%;
-  }
+    background-image: url('https://media.contentapi.ea.com/content/dam/gin/images/2017/01/lotr-conquest-keyart-min.jpg.adapt.crop191x100.628p.jpg') ;
 
-.container-fluid{
-    position: relative;
-    z-index: 1;
-    border: 2px solid red;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    overflow: hidden;
 }
-
-.container-fluid::before {
-content: "";
-position: absolute;
-top: 0; 
-left: 0;
-width: 100%; 
-height: 100%;  
-opacity: .5; 
-z-index: -1;
-background-image: url('https://media.contentapi.ea.com/content/dam/gin/images/2017/01/lotr-conquest-keyart-min.jpg.adapt.crop191x100.628p.jpg');
-background-size: 100% 100%;
-background-repeat: no-repeat;
-background-position: center center;
-  }
