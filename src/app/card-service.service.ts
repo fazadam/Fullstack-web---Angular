@@ -15,4 +15,17 @@ export class CardServiceService {
   getUserCards(username: string){
     return this.http.get<Card[]>(`${this.url}/cards/${username}`);
   }
+
+  getAllCards(){
+    return this.http.get<Card[]>(`${this.url}/allCards`);
+  }
+
+  deleteCard(cardName: string) {
+    return this.http.put<any>(`${this.url}/deleteCard/${cardName}`, {});
+  }
+
+  createCard(card : Card){
+    return this.http.put<Card>(`${this.url}/createNewCardFrontend`, card);
+
+  }
 }

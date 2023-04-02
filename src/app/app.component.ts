@@ -1,6 +1,7 @@
-import { Component,EventEmitter, Output } from '@angular/core';
+import { Component,EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { LoginServiceAuthService } from './login-service-auth.service';
 
 
 
@@ -9,13 +10,24 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-
-constructor(private router:Router, private http: HttpClient){}
+export class AppComponent implements OnInit{
 
 
-@Output() logoutEvent = new EventEmitter();
+constructor(private router:Router, private http: HttpClient, private loginService: LoginServiceAuthService){}
 
+ngOnInit(): void {
+  // this.loginService.isAdmin().subscribe(result => {
+  //   this.isAdmin = result;
+  //   console.log(this.isAdmin);
+
+  // });
+}
+
+
+
+isAdmin(): boolean{
+  return !!localStorage.getItem('isAdmin');
+}
 
 isLoggedIn(): boolean {
   return !!localStorage.getItem('loggedInUser');
@@ -52,8 +64,15 @@ showGame(){
 
 }
 
+showAdmin(){
+  this.router.navigate(['/admin']);
+}
+
 onLogout(){
   localStorage.removeItem('loggedInUser');
+  localStorage.removeItem('isAdmin');
+  
+
   console.log(localStorage.getItem('loggedInUser'));
   this.router.navigate(['/login']);
   // this.logoutEvent.emit();

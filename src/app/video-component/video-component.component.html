@@ -1,7 +1,7 @@
 <body>
     
 
-<button (click)="showOnlyFavorites()">Favorite videos</button>
+<button class="btn btn-lg btn-primary btn-block" (click)="showOnlyFavorites()">Favorite videos</button>
 <div *ngIf="errorMsg">{{errorMsg}}</div>
 
 <div class="container">
@@ -11,7 +11,7 @@
             <div class="col-md-3 mb-4" *ngFor="let favorite of favoriteVideos">
                 <iframe width="100%" height="auto" [src]="getVideoUrl(favorite)" allow="autoplay; encrypted-media"
                     allowfullscreen></iframe>
-                <button (click)="removeFromFavoritVideos(favorite)">Remove from Favorites</button>
+                <button class="btn btn-lg btn-primary btn-block" (click)="removeFromFavoritVideos(favorite)">Remove from Favorites</button>
             </div>
         </div>
     </div>
@@ -22,14 +22,14 @@
         <div class="col-md-3 mb-4">
             <iframe width="100%" height="auto" src="https://www.youtube.com/embed/OAolKXDuM2Y" frameborder="0"
                 allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            <button (click)="addToFavorites('https://www.youtube.com/embed/OAolKXDuM2Y')">Add to Favorites</button>
+            <button class="btn btn-lg btn-primary btn-block" (click)="addToFavorites('https://www.youtube.com/embed/OAolKXDuM2Y')">Add to Favorites</button>
         </div>
         <div class="col-md-3 mb-4">
             <iframe width="100%" height="auto" src="https://www.youtube.com/embed/1al7QzS916g"
                 title="#4 Szilmarilok - Valinor és a tündék" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen></iframe>
-            <button (click)="addToFavorites('https://www.youtube.com/embed/1al7QzS916g')">Add to Favorites</button>
+            <button  class="btn btn-lg btn-primary btn-block" (click)="addToFavorites('https://www.youtube.com/embed/1al7QzS916g')">Add to Favorites</button>
 
         </div>
         <div class="col-md-3 mb-4">
@@ -37,7 +37,7 @@
                 title="#6 Szilmarilok - Valinor homályba borulta" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen></iframe>
-            <button (click)="addToFavorites('https://www.youtube.com/embed/CI-u00U1MzI')">Add to Favorites</button>
+            <button class="btn btn-lg btn-primary btn-block"(click)="addToFavorites('https://www.youtube.com/embed/CI-u00U1MzI')">Add to Favorites</button>
 
         </div>
         <div class="col-md-3 mb-4">
@@ -45,7 +45,7 @@
                 title="#8 Szilmarilok - Beleriand birodalmai" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen></iframe>
-            <button (click)="addToFavorites('https://www.youtube.com/embed/jO_747Ov038')">Add to Favorites</button>
+            <button class="btn btn-lg btn-primary btn-block"(click)="addToFavorites('https://www.youtube.com/embed/jO_747Ov038')">Add to Favorites</button>
 
         </div>
     </div>
@@ -57,7 +57,7 @@
                 title="#10 Szilmarilok - A Váratlan Láng Csatája" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen></iframe>
-            <button
+            <button class="btn btn-lg btn-primary btn-block"
                 (click)="addToFavorites('https://www.youtube.com/embed/w7idpcWKTVw?list=PLr0Kumg0jLgWjLiHDXDtPYrkG5N4FD2rq')">Add
                 to Favorites</button>
 
@@ -68,7 +68,7 @@
                 title="#11 Szilmarilok - Beren és Lúthien története" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen></iframe>
-            <button
+            <button class="btn btn-lg btn-primary btn-block"
                 (click)="addToFavorites('https://www.youtube.com/embed/kiPszENLMvo?list=PLr0Kumg0jLgWjLiHDXDtPYrkG5N4FD2rq')">Add
                 to Favorites</button>
 
@@ -79,7 +79,7 @@
                 title="#12 Szilmarilok - Húrin gyermekei I. rész" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen></iframe>
-            <button
+            <button class="btn btn-lg btn-primary btn-block"
                 (click)="addToFavorites('https://www.youtube.com/embed/l3xm8hFeIJA?list=PLr0Kumg0jLgWjLiHDXDtPYrkG5N4FD2rq')">Add
                 to Favorites</button>
 
@@ -91,7 +91,7 @@
                 title="#13 Szilmarilok - Húrin gyermekei II. rész" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen></iframe>
-            <button
+            <button class="btn btn-lg btn-primary btn-block"
                 (click)="addToFavorites('https://www.youtube.com/embed/R0xl4VmmPpY?list=PLr0Kumg0jLgWjLiHDXDtPYrkG5N4FD2rq')">Add
                 to Favorites</button>
 
@@ -103,7 +103,7 @@
                 src="https://www.youtube.com/embed/KBjbMymgeOY?list=PLr0Kumg0jLgWjLiHDXDtPYrkG5N4FD2rq"
                 title="#14 Szilmarilok - Morgoth bukása" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe> <button
+                allowfullscreen></iframe> <button class="btn btn-lg btn-primary btn-block"
                 (click)="addToFavorites('https://www.youtube.com/embed/KBjbMymgeOY?list=PLr0Kumg0jLgWjLiHDXDtPYrkG5N4FD2rq')">Add
                 to Favorites</button>
            
@@ -116,7 +116,7 @@
                 src="https://www.youtube.com/embed/B_idMDzANA8?list=PLr0Kumg0jLgWjLiHDXDtPYrkG5N4FD2rq"
                 title="#15 Szilmarilok - Númenor és a Másodkor teljes története" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe> <button
+                allowfullscreen></iframe> <button class="btn btn-lg btn-primary btn-block"
                 (click)="addToFavorites('https://www.youtube.com/embed/B_idMDzANA8?list=PLr0Kumg0jLgWjLiHDXDtPYrkG5N4FD2rq')">Add
                 to Favorites</button>
             

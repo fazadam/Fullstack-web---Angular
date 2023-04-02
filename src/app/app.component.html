@@ -27,6 +27,9 @@
 
         </ul>
         <ul class="navbar-nav ms-auto">
+            <li class="nav-item" *ngIf="isAdmin()">
+                <a class="nav-link" (click)="showAdmin()" routerLink="/admin">Admin</a>
+            </li>
             <li class="nav-item" *ngIf="isLoggedIn()">
                 <a class="nav-link" (click)="showProfile()" routerLink="/profile">Profile</a>
             </li>

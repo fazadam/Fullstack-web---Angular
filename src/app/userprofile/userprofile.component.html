@@ -49,12 +49,35 @@
 
         <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
 
+
+
         <div class="buttons">
           <button class="btn btn-primary" id="editButton" (click)="showUpdateForm()">Edit</button>
           <button class="btn btn-primary" id="saveButton" type="submit" [disabled]="userForm.disabled"
             (click)="onUpdateUserProfile()">Save</button>
         </div>
+
+        <div class="form-group">
+
+          <label for="roles">Roles:</label>
+          <div class="rolesArea" readonly>
+            <ul>
+              <li *ngFor="let role of roles">{{ role }}</li>
+            </ul>
+          </div>
+
+          <div *ngIf="!isAdmin">
+          <button type="button" class="btn btn-primary"  (click)="requestAdminRole()">Request Admin
+            Role</button>
+
+          <div *ngIf="requestedAdminRole" >Successfully requested Admin Role, waiting for the Admins to accpet/decline
+          </div>
+        </div>
+          <!-- <div *ngIf="isAdmin">Already having admin role</div> -->
+
+        </div>
       </form>
+
     </div>
   </div>
 

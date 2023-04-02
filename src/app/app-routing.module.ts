@@ -7,6 +7,8 @@ import { CardListComponentComponent } from './card-list-component/card-list-comp
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { GameComponentComponent } from './game-component/game-component.component';
 import { VideoComponentComponent } from './video-component/video-component.component';
+import { AdminComponentComponent } from './admin-component/admin-component.component';
+import { AdminGuard } from './admin.guard';
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch:'full'},
@@ -16,7 +18,8 @@ const routes: Routes = [
   {path: 'cards', component:CardListComponentComponent},
   {path: 'profile',component: UserprofileComponent},
   {path: 'game',component: GameComponentComponent},
-  {path: 'videos', component: VideoComponentComponent}
+  {path: 'videos', component: VideoComponentComponent},
+  {path: 'admin', component: AdminComponentComponent, canActivate: [AdminGuard]}
 ];
 
 @NgModule({
@@ -24,4 +27,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const rountingComponents=[LoginComponentComponent,SignupComponentComponent,CardListComponentComponent,UserprofileComponent,GameComponentComponent,VideoComponentComponent]
+export const rountingComponents=[LoginComponentComponent,SignupComponentComponent,CardListComponentComponent,UserprofileComponent,GameComponentComponent,VideoComponentComponent,AdminComponentComponent]

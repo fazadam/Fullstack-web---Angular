@@ -1,8 +1,30 @@
+
+@font-face {
+    font-family: 'Ringbearer';
+    src: url('Ringbearer Medium 500.ttf') format('truetype');
+    font-weight: 500;
+  }
+  
+  *{
+    font-family: 'Ringbearer';
+  } 
+  
+
 body{
-    background-image: url('https://static1.moviewebimages.com/wordpress/wp-content/uploads/2023/02/children-of-hurin-tolkien.jpg') ;
+    background-image: url('https://images.bauerhosting.com/legacy/media/627a/639d/d89b/4868/6675/e4c3/lotr-1.jpg?q=80&auto=format&w=850&ar=16:9&fit=crop&crop=top') ;
 
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     overflow: hidden;
+}
+.btn:hover{
+  background-color:rgba(23,23,35,255);
+  border-color:rgba(23,23,35,255);
+
+}
+
+.btn:active{
+border-color:   rgba(33,110,156,255);
+background-color:rgba(33,110,156,255) ;
 }

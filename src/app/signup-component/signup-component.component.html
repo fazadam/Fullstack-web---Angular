@@ -41,15 +41,17 @@
     <label for="">Password</label>
     <input type="password" formControlName="password" class="form-control" placeholder="Jelszó" />
 
-    <div *ngIf=" registrationForm.get('password')?.touched">
-      <small class="text-danger" *ngIf="registrationForm.get('password')?.hasError('required')">PASSWORD IS
-        REQUIRED</small>
-      <small class="text-danger" *ngIf="registrationForm.get('password')?.hasError('minlength')">PASSWORD MUST BE AT
-        LEAST 8 CHARACTERS LONG</small><br>
-      <small class="text-danger" *ngIf="registrationForm.get('password')?.hasError('pattern')">PASSOWRD MUST CONTAIN AT
-        LEAST ONE UPPERCASE LETTER,ONE LOWERCASE LETTER, ONE NUMBER AND ONEN SPECIAL CHARACTER (@#$%^&+=!)</small>
-    </div>
+    
   </div>
+  <div *ngIf=" registrationForm.get('password')?.touched">
+    <small class="text-danger" *ngIf="registrationForm.get('password')?.hasError('required')">PASSWORD IS
+      REQUIRED</small>
+    <small class="text-danger" *ngIf="registrationForm.get('password')?.hasError('minlength')">PASSWORD MUST BE AT
+      LEAST 8 CHARACTERS LONG</small><br>
+    <small class="text-danger" *ngIf="registrationForm.get('password')?.hasError('pattern')">PASSOWRD MUST CONTAIN AT
+      LEAST ONE UPPERCASE LETTER,ONE LOWERCASE LETTER, ONE NUMBER AND ONEN SPECIAL CHARACTER (@#$%^&+=!)</small>
+  </div>
+ 
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
   </form>
