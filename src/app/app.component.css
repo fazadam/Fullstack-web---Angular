@@ -10,6 +10,19 @@
 } 
 
 
+#appComponentCarousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainTitle {
+  position: absolute;
+  z-index: 1;
+}
+
+img{height: 200px;background-position: 50% 50% ;}
+
 .affix {
   top: 0;
   width: 100%;

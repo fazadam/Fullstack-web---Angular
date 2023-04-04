@@ -1,3 +1,26 @@
+@font-face {
+    font-family: 'Ringbearer';
+    src: url('Ringbearer Medium 500.ttf') format('truetype');
+    font-weight: 500;
+  }
+  
+  *{
+    font-family: 'Ringbearer';
+  } 
+  
+  body{
+    display: flex;
+    height: 100%;
+    background: url("https://img.freepik.com/free-photo/wooden-background_24972-623.jpg") no-repeat;
+    background-position: center;
+    overflow: auto;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    align-items: start;
+    justify-content: center;
+  }
+
 .card-list{
     display: flex;
     flex-wrap: wrap;
@@ -15,7 +38,9 @@
 .card{
     height: fit-content;
     margin-top: 10px;
+    color: black;
 }
+
 
 .card:hover{
     transform: scale(1.1);
@@ -27,10 +52,52 @@
     height: 400px;
 }
 
-.container-fluid{
-    background-image: url('https://img.freepik.com/free-photo/wooden-background_24972-623.jpg');
-    background-size: 100% 100%;
-    background-repeat:no-repeat;
-    background-position: center center;
+
+#newDeckCardsId{
+    display: flex;
+    flex-wrap: nowrap;
+    size: 100% 100%;
+    height: 500px;
+    overflow-x: auto;
+    border-radius: 20px;
+    box-shadow: 0px 0px 100px #888888;
+
 }
 
+#deckCardList{
+    display: flex;
+    flex-wrap: nowrap;
+    size: 100% 100%;
+    height: 500px;
+    overflow-x: auto;
+    border-radius: 20px;
+    box-shadow: 0px 0px 100px #888888;
+}
+
+h2,label,p{
+    color:antiquewhite
+}
+
+.buttons{
+
+    margin: 5px;
+    display: flex;
+    justify-content: end;
+}
+
+.btn{
+    margin: 5px;
+    font-size: 20px;
+    
+}
+
+.btn:hover{
+    background-color:rgba(23,23,35,255);
+    border-color:rgba(23,23,35,255);
+  
+  }
+  
+  .btn:active{
+  border-color:   rgba(33,110,156,255);
+  background-color:rgba(33,110,156,255) ;
+  }

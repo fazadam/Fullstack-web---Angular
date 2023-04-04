@@ -9,6 +9,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class VideoComponentComponent {
 
+isLoggedIn: boolean = localStorage.getItem('loggedInUser') ? true : false;
+
   errorMsg = '';
   showOnlyFavoritesBool = false;
   favoriteVideos!: string[];

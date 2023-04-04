@@ -4,6 +4,9 @@ import { GameService } from '../game-service.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginServiceAuthService } from '../login-service-auth.service';
+import { User } from '../user';
+import { CardServiceService } from '../card-service.service';
 
 @Component({
   selector: 'app-game-component',
@@ -11,6 +14,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./game-component.component.css']
 })
 export class GameComponentComponent {
+
+  user!: User[];
+  userDecksName!: string[];
+  deckName!: string;
+  selectedDeckCards!: Card[];
+  selectedDeckName!: string;
+  deckIsChosen!: boolean;
+
 
   gameForm!: FormGroup;
   handCards!: Card[];
@@ -23,7 +34,7 @@ export class GameComponentComponent {
   siegeRowSum!: number;
   rowSumTotal!: number;
 
-  constructor(private formBuilder: FormBuilder, private gameService: GameService, private router: Router) { }
+  constructor(private cardService: CardServiceService,private formBuilder: FormBuilder, private gameService: GameService, private router: Router,private loginService: LoginServiceAuthService) { }
 
   loggedinUser = localStorage.getItem('loggedInUser') ?? '';
 
@@ -46,15 +57,47 @@ export class GameComponentComponent {
     });
 
     // =============================== KARTYA KEZBE HUZAS ===================================
-    this.gameService.drawCardsFromDeck(this.loggedinUser).subscribe(handCards => {
-      this.handCards = handCards;
-      this.handCards.forEach(card => {
-        card.picture = 'data:image/png;base64,' + card.picture;
-      })
-        ;
+    // this.gameService.drawCardsFromDeck(this.loggedinUser).subscribe(handCards => {
+    //   this.handCards = handCards;
+    //   this.handCards.forEach(card => {
+    //     card.picture = 'data:image/png;base64,' + card.picture;
+    //   })
+    //     ;
+    // });
+
+    // =========== deckek betolteses =========
+    this.loginService.getUser(localStorage.getItem('loggedInUser')).subscribe({
+      next: (response) => {
+        this.userDecksName = Object.keys(response.userDecks);
+
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
+
+
   }
 
+  showChoosenDeck(deckName : string){
+        // ========== deck kivalasztasa es kartyak kezbe huzasa =============
+        // this.cardService.getUsersDeckCards(localStorage.getItem('loggedInUser')?? '',deckName).subscribe(deckCards => {
+        //   this.selectedDeckCards = deckCards;
+        //   console.log('cards' + deckCards)
+        // });
+        this.selectedDeckName = deckName;
+
+        this.gameService.drawCardsFromDeck(this.loggedinUser, deckName).subscribe(recievedRandomCards => {
+          this.handCards = recievedRandomCards;
+          console.log(this.handCards)
+          this.handCards.forEach(card => {
+            card.picture = 'data:image/png;base64,' + card.picture;
+          })
+            ;
+        });
+        this.deckIsChosen = true;
+      
+  }
 
   // =============================== KARTYARA KATT --> SORINDEX ES ROW TIPUS VISSZAADAS + ATADAS A SOROKNAK ===================================
 

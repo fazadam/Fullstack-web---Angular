@@ -66,8 +66,8 @@
             </ul>
           </div>
 
-          <div *ngIf="!isAdmin">
-          <button type="button" class="btn btn-primary"  (click)="requestAdminRole()">Request Admin
+          <div *ngIf="!isAdmin" class="requestButton">
+            <button type="button" class="btn btn-primary" (click)="requestAdminRole()">Request Admin
             Role</button>
 
           <div *ngIf="requestedAdminRole" >Successfully requested Admin Role, waiting for the Admins to accpet/decline

@@ -48,7 +48,6 @@ export class UserprofileComponent implements OnInit {
         this.userForm.get('password')?.setValue(response.password);
         this.userForm.get('email')?.setValue(response.email);
 
-
       },
       error: (err) => {
         console.log(err);

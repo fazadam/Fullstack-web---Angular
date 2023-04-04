@@ -12,8 +12,8 @@ export class GameService {
 
   constructor(private http: HttpClient) { }
 
-  drawCardsFromDeck(username: string): Observable<Card[]> {
-    return this.http.get<Card[]>(`${this.url}/draw/${username}`);
+  drawCardsFromDeck(username: string , deckname: string): Observable<Card[]> {
+    return this.http.get<Card[]>(`${this.url}/draw/${username}/${deckname}`);
   }
   
   playCard(row: string, index: number): Observable<void> {

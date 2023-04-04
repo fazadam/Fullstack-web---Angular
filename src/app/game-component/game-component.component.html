@@ -1,10 +1,31 @@
 <body>
     
 
-<div class="container-fluid">
+<div class="container">
 <h1>CARD GAME</h1>
 
-<form [formGroup]="gameForm">
+<div>
+
+<div class="container-fluid" *ngIf="!deckIsChosen">
+<h2 class="text-center">Choose Deck: </h2>
+<div *ngFor="let deckName of userDecksName" class="text-center">
+  <button class="btn btn-lg btn-primary btn-block" 
+    (click)="showChoosenDeck(deckName)">{{deckName}}</button>
+
+  <div class="container" *ngIf="selectedDeckName === deckName">
+    <h2>Deck Cards: {{deckName}}</h2>
+    <div class="row" id="deckCardList">
+      <div class="col-md-2" *ngFor="let card of selectedDeckCards;">
+        <div class="card">
+          <img class="card-img-top" [src]="card.picture" alt="{{ card.name }}">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<form [formGroup]="gameForm" *ngIf="deckIsChosen">
 
     <h2>HAND CARDS</h2>
     <div class="row hand">
@@ -50,5 +71,5 @@
 
 </form>
 </div>
-
+</div>
 </body>

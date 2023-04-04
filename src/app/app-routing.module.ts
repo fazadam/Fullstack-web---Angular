@@ -11,7 +11,7 @@ import { AdminComponentComponent } from './admin-component/admin-component.compo
 import { AdminGuard } from './admin.guard';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/login', pathMatch:'full'},
+  {path: '', redirectTo: '/home', pathMatch:'full'},
   {path: 'login',component: LoginComponentComponent},
   {path:'signup',component:SignupComponentComponent},
   {path: 'home', component:HomePageComponent},

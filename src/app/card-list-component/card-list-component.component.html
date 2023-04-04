@@ -1,28 +1,76 @@
-<!-- <div class="card-list" *ngIf="isLoggedIn()">
-  <p>Cards of {{loggedinUser}}</p>
-  <div *ngFor="let card of cards;let last">
-      <h2>{{ card.name }}</h2>
-      <h2>{{card.power}}</h2>
-      <p>{{ card.type }}</p>
-      <img [src]="card.picture" alt="{{ card.name }}" />
+<body>
+
+  <button class="btn btn-lg btn-primary btn-block" (click)="showCreateNewDeck()">Create Deck</button>
+
+  <div class="container-fluid">
+    <form [formGroup]="deckForm">
+
+      <div class="container" *ngIf="showNewDeckRow">
+
+        <h2>New Deck</h2>
+        <label for="deckName">Deck Name:</label>
+
+        <input type="text" formControlName="deckName">
+        <p for=""> Each card only added maximum 2 times</p>
+
+        <div class="row" id="newDeckCardsId">
+          <div class="col-md-2" *ngFor="let card of newDeckCards;">
+            <div class="card">
+              <img class="card-img-top" [src]="card.picture" (click)="removeFromNewDeck(card)" alt="{{ card.name }}">
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="saveNewDeckToUser()">Save Deck</button>
+        <button class="btn btn-lg btn-primary btn-block" (click)="showCreateNewDeck()">Cancel</button>
+        <div *ngIf="errorMsg" class="text text-danger" id="error">{{errorMsg}}</div>
+      </div>
+    </form>
+
+
+    <!-- specific decks cards -->
+    <h2 class="text-center">Users existing Decks: </h2>
+    <div *ngFor="let deckName of userDecksName" class="text-center">
+      <button class="btn btn-lg btn-primary btn-block" 
+        (click)="showSpecificDecksCards(deckName)">{{deckName}}</button>
+
+      <div class="container" *ngIf="specificDeckContainer && selectedDeckName === deckName">
+        <h2>Deck Cards: {{deckName}}</h2>
+        <div class="row" id="deckCardList">
+          <div class="col-md-2" *ngFor="let card of selectedDeckCards;">
+            <div class="card">
+              <img class="card-img-top" [src]="card.picture" alt="{{ card.name }}">
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="specificDeckContainer = false">Back</button>
+        <button class="btn btn-lg btn-primary btn-block" (click)="deleteUserDeck(deckName)">Delete Deck</button>
+
+      </div>
     </div>
-</div> -->
-<div class="container-fluid">
-<label *ngIf="!isLoggedIn()">First log in to see your cards</label>
 
 
-<div *ngIf="isLoggedIn()">
-  <h1>Cards of {{loggedinUser}}</h1>
-  <div class="row row-cols-md-6 row-cols-md-3 ">
-    <div class="col mb-4" *ngFor="let card of cards">
-      <div class="card">
-        <img src="{{card.picture}}" class="card-img-top" alt="{{card.name}}">
-        <div class="card-body">
-          <h5 class="card-title" style="text-align: center;">{{card.name}}</h5>
+
+
+
+
+    <div *ngIf="isLoggedIn()">
+      <h2 class="text-center">All cards</h2>
+      <div class="row row-cols-md-6 row-cols-md-3 ">
+        <div class="col mb-4" *ngFor="let card of cards">
+          <div class="card text-center">
+            <img src="{{card.picture}}" class="card-img-top" alt="{{card.name}}">
+            <div class="card-body">
+              <h5 class="card-title" style="text-align: center;">{{card.name}}</h5>
+              <button *ngIf="showNewDeckRow" class="btn btn-lg btn-primary btn-block"
+                (click)="addCardToNewDeck(card)">Add to new Deck</button>
+
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
 
-</div>
+  </div>
+
+</body>

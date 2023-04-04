@@ -22,7 +22,7 @@
                                     <li *ngFor="let role of user.roles">{{ role.name }} </li>
                                 </ul>
                             </td>
-                            <td><button class="btn btn-lg btn-primary btn-block" (click)="revokeAdmin(user.username)">Revoke Admin</button></td>
+                            <td><button class="btn btn-lg btn-primary btn-block" (click)="revokeAdmin(user.username)" >Revoke role</button></td>
                             <td><button class="btn btn-lg btn-primary btn-block" (click)="deleteUser(user.username)">Delete User</button></td>
 
                         </tr>

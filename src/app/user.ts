@@ -12,7 +12,7 @@ export class User {
         public roles: Set<Role>,
         public pendingRoleRequests: Set<Role>,
         public allCards: Card[],
-      
+        public userDecks: Map<string, string[]>
         
     ){}
   }

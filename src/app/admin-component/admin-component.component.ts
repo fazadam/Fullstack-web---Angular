@@ -16,6 +16,7 @@ export class AdminComponentComponent implements OnInit{
   cards!: Card[];
   users!: User[];
   usersWithPendingRequests!: User[];
+  isAdmin!: boolean;
 
 
   cardImageBase64!: string;
@@ -60,9 +61,11 @@ export class AdminComponentComponent implements OnInit{
       this.cards.forEach(card => {
         card.picture = 'data:image/png;base64,' + card.picture;
       });
-});
 
-  }
+});}
+
+
+
 deleteUser(username: string) {
   this.loginService.deleteUser(username)
   .subscribe({
@@ -155,21 +158,7 @@ onFileSelected(event: any) {
 
 
 onSubmitAddCardForm(){
-  // const formData = new FormData();
-  // if (this.addNewCard.controls.cardName.value !== null) {
-  //   formData.append('cardName', this.addNewCard.controls.cardName.value);
-  //   console.log()
-  // }
-  // if (this.addNewCard.controls.cardPower.value !== null) {
-  //   formData.append('cardPower', this.addNewCard.controls.cardPower.value);
-  // }
-  // if (this.addNewCard.controls.cardType.value !== null) {
-  //   formData.append('cardType', this.addNewCard.controls.cardType.value);
-  // }
-  // const picture = this.addNewCard.controls.picture.value;
-  // if (picture !== null) {
-  //   formData.append('picture', picture);
-  // } 
+
 
 
     if (this.addNewCard.valid) {
