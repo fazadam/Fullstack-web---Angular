@@ -123,7 +123,7 @@ export class CardListComponentComponent implements OnInit {
 
     
 
-    if (this.deckForm.get('deckName') && this.newDeckCards.length >= 20) {
+    if (this.deckForm.get('deckName') && this.newDeckCards.length >= 5) {
 
       this.cardService.createDeck(this.loggedinUser, this.deckForm.get('deckName')?.value ?? '', this.newDeckCardsString)
         .subscribe({

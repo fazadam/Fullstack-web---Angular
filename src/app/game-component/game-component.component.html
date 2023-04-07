@@ -1,75 +1,143 @@
 <body>
-    
 
-<div class="container">
-<h1>CARD GAME</h1>
 
-<div>
+    <div class="container">
+        <h1>CARD GAME</h1>
 
-<div class="container-fluid" *ngIf="!deckIsChosen">
-<h2 class="text-center">Choose Deck: </h2>
-<div *ngFor="let deckName of userDecksName" class="text-center">
-  <button class="btn btn-lg btn-primary btn-block" 
-    (click)="showChoosenDeck(deckName)">{{deckName}}</button>
-
-  <div class="container" *ngIf="selectedDeckName === deckName">
-    <h2>Deck Cards: {{deckName}}</h2>
-    <div class="row" id="deckCardList">
-      <div class="col-md-2" *ngFor="let card of selectedDeckCards;">
-        <div class="card">
-          <img class="card-img-top" [src]="card.picture" alt="{{ card.name }}">
+        <div class="container">
+            <button class="btn btn-lg btn-primary btn-block" (click)="showCreateGameFormClick()">Create Game</button>
+            <button class="btn btn-lg btn-primary btn-block" (click)="showListOfGamesClick()">List of Games</button>
         </div>
+
+
+        <div class="container" *ngIf="showCreateGameForm && !showListOfGamesForm ">
+            <form [formGroup]="createGameForm" class="newgameForm">
+                <h1 class="form-gameform-heading">Create New Game</h1>
+
+                <label for="">new Game Name</label>
+                <input type="text" formControlName="gameName" class="form-control" placeholder="Game Name" />
+
+                <label for="">new Game Password</label>
+                <input type="password" formControlName="gamePassword" class="form-control" placeholder="Password" />
+                <div *ngIf="errorMessage" class="text text-danger" id="error">{{errorMessage}}</div>
+
+                <button class="btn btn-lg btn-primary btn-block" (click)="onCreateNewGameButton()">Save</button>
+
+            </form>
+        </div>
+
+        <div class="container" *ngIf="!showCreateGameForm && showListOfGamesForm">
+            <form [formGroup]="listOfCurrentGames" class="joingameForm">
+
+                <div class="scrollable-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Players</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let game of listOfAllGames">
+                                <td>{{game.gameName}}</td>
+                                <td>
+                                    <ul>
+                                        <li *ngFor="let player of game.players">{{player.playerName}}</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <div class="d-flex justify-content-end align-items-center">
+                                        <input type="password" formControlName="password" class="form-control"
+                                            placeholder="Password">
+                                        <button class="btn btn-lg btn-primary"
+                                            (click)="onJoinGameButton(game.gameName)">Connect</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    <div *ngIf="erromsg" class="text text-danger" id="error">{{erromsg}}</div>
+
+                </div>
+
+            </form>
+        </div>
+
+
+
+
+
+
+
+
+        <div class="container-fluid" *ngIf="(createOrCurrentlyJoinedGame && !usedDeckAssigned && !deckIsChosen )">
+            <h2 class="text-center">Choose Deck: </h2>
+            <div *ngFor="let deckName of userDecksName" class="text-center">
+                <button class="btn btn-lg btn-primary btn-block"
+                    (click)="showChoosenDeck(deckName)">{{deckName}}</button>
+            </div>
+        </div>
+
+        <div *ngIf="deckIsChosen || usedDeckAssigned || handCards">
+            <form [formGroup]="gameForm">
+                <h2>HAND CARDS</h2>
+                <div class="row hand">
+                    <div class="col-md-2" *ngFor="let card of handCards;let i=index">
+                        <div class="card">
+                            <img class="card-img-top" [src]="card.picture" alt="{{ card.name }}"
+                                (click)="selectedCardToPlay(i,card.type)">
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <h2 class="activeCardContainer"> Active Card</h2>
+                <h2></h2>
+                <div class="row" id="activeCardRow">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img class="card-img-top" src="https://www.johndcook.com/rock_spock.png">
+                        </div>
+                    </div>
+                    <div class="col-md-4" *ngIf="enemyActiveCardShow">
+                        <div class="card">
+                            <img class="card-img-top" [src]="enemyActiveCard?.picture">
+                        </div>
+                        <label for="enemyCardType"> ENEMY CARD: {{enemyActiveCard?.type}}</label>
+
+
+                    </div>
+                    <div class="col-md-4" *ngIf="activeCardPage && activeCardShow">
+                        <div class="card">
+                            <img class="card-img-top" [src]="activeCardPage.picture" alt="{{ activeCardPage.name }}">
+                        </div>
+                        <label for="activeCardType" class="text-center">{{activeCardPage.type}}</label>
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div *ngIf="erromsg" class="text-danger" id="error" >{{erromsg}}</div>
+
+    <div class="text-center"  *ngIf="showGameState"  id="gameResult">
+        <label class="text-center"> {{playGameState}}</label>
       </div>
-    </div>
-  </div>
-</div>
-</div>
+      
 
-<form [formGroup]="gameForm" *ngIf="deckIsChosen">
-
-    <h2>HAND CARDS</h2>
-    <div class="row hand">
-        <div class="col-md-2" *ngFor="let card of handCards;let i=index">
-            <div class="card">
-                <img class="card-img-top" [src]="card.picture" alt="{{ card.name }}" (click)="selectedCardToPlay(i,card.type)">
-            </div>
-        </div>
+    <div class="text-center" id="playButton">
+        <button class="btn btn-lg btn-primary btn-block" (click)="playGame()"
+            *ngIf="activeCardPage && !playButtonHit">Play</button>
+        <button class="btn btn-lg btn-primary btn-block" (click)="nextRound()"
+            *ngIf="playButtonHit && showNextRoundButton">Next Round</button>
     </div>
 
-    
 
 
-    <h1>TOTAL: {{rowSumTotal}}</h1>
 
-    <h2>Melee total: {{meleeRowSum}}</h2>
-    <div class="row">
-        <div class="col-md-2" *ngFor="let card of meleeCards;">
-            <div class="card">
-                <img class="card-img-top" [src]="card.picture" alt="{{ card.name }}">
-            </div>
-        </div>
-    </div>
 
-    <h2>Ranged total: {{rangedRowSum}}</h2>
-    <div class="row">
-        <div class="col-md-2" *ngFor="let card of rangedCards;">
-            <div class="card">
-                <img class="card-img-top" [src]="card.picture" alt="{{ card.name }}">
-            </div>
-        </div>
-    </div>
-
-    <h2>Siege total: {{siegeRowSum}}</h2>
-    <div class="row">
-        <div class="col-md-2" *ngFor="let card of siegeCards;">
-            <div class="card">
-
-                <img class="card-img-top" [src]="card.picture" alt="{{ card.name }}">
-            </div>
-        </div>
-    </div>
-
-</form>
-</div>
-</div>
 </body>

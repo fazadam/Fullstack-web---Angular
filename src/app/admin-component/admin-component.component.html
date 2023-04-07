@@ -22,15 +22,17 @@
                                     <li *ngFor="let role of user.roles">{{ role.name }} </li>
                                 </ul>
                             </td>
-                            <td><button class="btn btn-lg btn-primary btn-block" (click)="revokeAdmin(user.username)" >Revoke role</button></td>
-                            <td><button class="btn btn-lg btn-primary btn-block" (click)="deleteUser(user.username)">Delete User</button></td>
+                            <td><button class="btn btn-lg btn-primary btn-block"
+                                    (click)="revokeAdmin(user.username)">Revoke role</button></td>
+                            <td><button class="btn btn-lg btn-primary btn-block"
+                                    (click)="deleteUser(user.username)">Delete User</button></td>
 
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        
+
         <div class="col-md-8">
             <h1>Pending Admin Requests</h1>
 
@@ -50,11 +52,14 @@
                             <td>{{userPendingRequest.email}}</td>
                             <td>
                                 <ul>
-                                    <li *ngFor="let role of userPendingRequest.pendingRoleRequests">{{ role.name }} </li>
+                                    <li *ngFor="let role of userPendingRequest.pendingRoleRequests">{{ role.name }}
+                                    </li>
                                 </ul>
                             </td>
-                            <td><button class="btn btn-lg btn-primary btn-block" (click)="acceptRequest(userPendingRequest.username)">Accept</button></td>
-                            <td> <button  class="btn btn-lg btn-primary btn-block"(click)="declineRequest(userPendingRequest.username)">Decline</button></td>
+                            <td><button class="btn btn-lg btn-primary btn-block"
+                                    (click)="acceptRequest(userPendingRequest.username)">Accept</button></td>
+                            <td> <button class="btn btn-lg btn-primary btn-block"
+                                    (click)="declineRequest(userPendingRequest.username)">Decline</button></td>
 
                         </tr>
                     </tbody>
@@ -64,53 +69,46 @@
 
         <div class="col-md-12 mt-5">
             <h1>Cards</h1>
-            <button  class="btn btn-lg btn-primary btn-block" (click)="showAddCardWindow()">Create Card</button>
-        
-            <div class="container" *ngIf="showAddCard" >
+            <button class="btn btn-lg btn-primary btn-block" (click)="showAddCardWindow()">Create Card</button>
+
+            <div class="container" *ngIf="showAddCard">
                 <form [formGroup]="addNewCard" (ngSubmit)="onSubmitAddCardForm()" class="singupForm">
-                  <h1 class="form-signup-heading">Crate new Card</h1>
-                            
-              
-                  <div class="form-group">
-                    <label for="">Card Name</label>
-                    <input type="text" formControlName="cardName" class="form-control" placeholder="Card Name" />
-              
-         
-                  </div>
-              
-              
-                  <div class="form-group">
-              
-                  <label for="">Power</label>
-                  <input type="number" formControlName="cardPower" class="form-control" placeholder="Power" />
-              
-           
-                </div>
-              
-       
-                <div class="form-group">
-                    <label for="">Type</label>
-                    <select formControlName="cardType" class="form-control">
-                      <option value="melee">Melee</option>
-                      <option value="ranged">Ranged</option>
-                      <option value="siege">Siege</option>
-                    </select>
-                  </div>
+                    <h1 class="form-signup-heading">Crate new Card</h1>
 
-                <div class="form-group">
-                    <label for="">Picture:</label>
-                    <input type="file" formControlName="picture" class="form-control-file" (change)="onFileSelected($event)" />
-                  </div>
-          
-               
-              
-                  <button class="btn btn-lg btn-primary btn-block" type="submit">Create New Card</button>
+
+                    <div class="form-group">
+                        <label for="">Card Name</label>
+                        <input type="text" formControlName="cardName" class="form-control" placeholder="Card Name" />
+
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Type</label>
+                        <select formControlName="cardType" class="form-control">
+                            <option value="Human">Human</option>
+                            <option value="Elf">Elf</option>
+                            <option value="Dwarf">Dwarf</option>
+                            <option value="Dwarf">Istari</option>
+                            <option value="Dwarf">Orc</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Picture:</label>
+                        <input type="file" formControlName="picture" class="form-control-file"
+                            (change)="onFileSelected($event)" />
+                    </div>
+
+
+
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Create New Card</button>
                 </form>
-              
 
 
-    
-     
+
+
+
 
             </div>
             <div class="row row-cols-md-6 row-cols-md-3">
@@ -118,7 +116,8 @@
                     <div class="card">
                         <img src="{{card.picture}}" class="card-img-top" alt="{{card.name}}" />
                         <div class="card-body d-flex justify-content-center">
-                            <button class="btn btn-lg btn-primary btn-block" (click)="deleteCard(card.name)">Delete</button>
+                            <button class="btn btn-lg btn-primary btn-block"
+                                (click)="deleteCard(card.name)">Delete</button>
                         </div>
                     </div>
                 </div>

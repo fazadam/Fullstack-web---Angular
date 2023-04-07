@@ -164,13 +164,11 @@ onSubmitAddCardForm(){
     if (this.addNewCard.valid) {
       const card: Card = {
         name: this.addNewCard.get('cardName')!.value || '',
-        power: Number(this.addNewCard.get('cardPower')!.value),
         type: this.addNewCard.get('cardType')!.value || '',
         picture: this.cardImageBase64
       };
 
       console.log(card.name + " cardname");
-      console.log(card.power + " pwoer");
 
       console.log(card.type + " type");
 
