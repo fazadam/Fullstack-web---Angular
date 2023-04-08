@@ -4,37 +4,37 @@
     <div class="container">
         <h1>CARD GAME</h1>
 
-        <div class="container">
+        <div class="container text-center">
             <button class="btn btn-lg btn-primary btn-block" (click)="showCreateGameFormClick()">Create Game</button>
             <button class="btn btn-lg btn-primary btn-block" (click)="showListOfGamesClick()">List of Games</button>
         </div>
 
-
-        <div class="container" *ngIf="showCreateGameForm && !showListOfGamesForm ">
-            <form [formGroup]="createGameForm" class="newgameForm">
+        <div class="container d-flex align-items-center justify-content-center" *ngIf="showCreateGameForm && !showListOfGamesForm " >
+            <form [formGroup]="createGameForm" class="newgameForm text-center mx-auto">
                 <h1 class="form-gameform-heading">Create New Game</h1>
-
+        
                 <label for="">new Game Name</label>
                 <input type="text" formControlName="gameName" class="form-control" placeholder="Game Name" />
-
+        
                 <label for="">new Game Password</label>
                 <input type="password" formControlName="gamePassword" class="form-control" placeholder="Password" />
                 <div *ngIf="errorMessage" class="text text-danger" id="error">{{errorMessage}}</div>
-
+        
                 <button class="btn btn-lg btn-primary btn-block" (click)="onCreateNewGameButton()">Save</button>
-
             </form>
         </div>
+        
 
-        <div class="container" *ngIf="!showCreateGameForm && showListOfGamesForm">
+        <div class="container text-center" *ngIf="!showCreateGameForm && showListOfGamesForm">
             <form [formGroup]="listOfCurrentGames" class="joingameForm">
 
-                <div class="scrollable-container">
+                <div class="scrollable-container text-center">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>Players</th>
+                                <th>Points</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -47,12 +47,16 @@
                                     </ul>
                                 </td>
                                 <td>
+                                    <ul>
+                                        <li *ngFor="let player of game.players">{{player.gamePoints}}</li>
+                                    </ul>
+                                </td>
+                                <td>
                                     <div class="d-flex justify-content-end align-items-center">
-                                        <input type="password" formControlName="password" class="form-control"
-                                            placeholder="Password">
-                                        <button class="btn btn-lg btn-primary"
-                                            (click)="onJoinGameButton(game.gameName)">Connect</button>
+                                        <input type="password" formControlName="password" class="form-control" placeholder="Password" style="width: 200px;">
+                                        <button class="btn btn-lg btn-primary" (click)="onJoinGameButton(game.gameName)">Connect</button>
                                     </div>
+                                    
                                 </td>
                             </tr>
                         </tbody>
@@ -72,7 +76,7 @@
 
 
 
-        <div class="container-fluid" *ngIf="(createOrCurrentlyJoinedGame && !usedDeckAssigned && !deckIsChosen )">
+        <div class="container-fluid text-center" *ngIf="(createOrCurrentlyJoinedGame && !usedDeckAssigned && !deckIsChosen )">
             <h2 class="text-center">Choose Deck: </h2>
             <div *ngFor="let deckName of userDecksName" class="text-center">
                 <button class="btn btn-lg btn-primary btn-block"
@@ -94,27 +98,33 @@
 
 
 
-                <h2 class="activeCardContainer"> Active Card</h2>
+                <h2 class="activeCardContainer text-center"> Active Card</h2>
                 <h2></h2>
                 <div class="row" id="activeCardRow">
                     <div class="col-md-4">
                         <div class="card">
-                            <img class="card-img-top" src="https://www.johndcook.com/rock_spock.png">
+                            <img class="card-img-top" src="assets/rules.jpg">
                         </div>
+                        <div class="text-center">
+                        <h2 class="text-center">Rules</h2>
+                    </div>
                     </div>
                     <div class="col-md-4" *ngIf="enemyActiveCardShow">
                         <div class="card">
                             <img class="card-img-top" [src]="enemyActiveCard?.picture">
                         </div>
-                        <label for="enemyCardType"> ENEMY CARD: {{enemyActiveCard?.type}}</label>
-
+                        <div class="text-center">
+                        <h2 for="enemyCardType"> Enemy Card: {{enemyActiveCard?.type}}</h2>
+                    </div>
 
                     </div>
                     <div class="col-md-4" *ngIf="activeCardPage && activeCardShow">
                         <div class="card">
                             <img class="card-img-top" [src]="activeCardPage.picture" alt="{{ activeCardPage.name }}">
                         </div>
-                        <label for="activeCardType" class="text-center">{{activeCardPage.type}}</label>
+                        <div class="text-center">
+                        <h2 for="activeCardType" class="text-center">Your card:{{activeCardPage.type}}</h2>
+                    </div>
 
                     </div>
                 </div>
@@ -122,12 +132,12 @@
             </form>
         </div>
     </div>
-    <div *ngIf="erromsg" class="text-danger" id="error" >{{erromsg}}</div>
+    <div *ngIf="erromsg" class="text-danger" id="error">{{erromsg}}</div>
 
-    <div class="text-center"  *ngIf="showGameState"  id="gameResult">
-        <label class="text-center"> {{playGameState}}</label>
-      </div>
-      
+    <div class="text-center" *ngIf="showGameState" id="gameResult">
+        <h2 class="text-center"> {{playGameState}}</h2>
+    </div>
+
 
     <div class="text-center" id="playButton">
         <button class="btn btn-lg btn-primary btn-block" (click)="playGame()"

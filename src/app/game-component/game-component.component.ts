@@ -23,6 +23,7 @@ export class GameComponentComponent {
   deckName!: string;
   selectedDeckCards!: Card[];
   selectedDeckName!: string;
+  
   deckIsChosen!: boolean; 
   playButtonHit!: boolean
   showNextRoundButton!: boolean
@@ -35,7 +36,6 @@ export class GameComponentComponent {
   gamePlayer!: GamePlayer;
   gameStatus!: Game;
   listOfAllGames: Game[] = [];
-  selectedGame!: Game;
   createOrCurrentlyJoinedGame!: boolean; 
   usedDeckAssigned!: boolean;
 
@@ -51,8 +51,18 @@ export class GameComponentComponent {
 
   handCards!: Card[];
 
-  activeCardPage!: Card;
-  enemyActiveCard: Card | undefined | null;
+  activeCardPage!: Card| undefined ;
+  enemyActiveCard: Card | undefined ;
+
+  
+  currentGame!: Game | undefined;
+  loggedInUser = localStorage.getItem('loggedInUser');
+  //currentPlayer = this.currentGame?.players.find(player => player.playerName === this.loggedInUser);
+  //otherPlayer = this.currentGame?.players.find(player => player.playerName !== this.loggedInUser);
+
+  currentPlayer?: GamePlayer
+  otherPlayer?: GamePlayer
+
 
 
 
@@ -67,11 +77,11 @@ export class GameComponentComponent {
   })
 
   listOfCurrentGames = new FormGroup({
+    gameNameInTheList: new FormControl(''),
     password: new FormControl('')
   });
 
   game: any = {
-    gameName: this.createGameForm.get('gameName')?.value,
     gamePassword: this.createGameForm.get('gamePassword')?.value
   }
 
@@ -79,6 +89,7 @@ export class GameComponentComponent {
   // toltsuk be azt a random 10 kartyat a deckbol a hand listaba
   ngOnInit() {
 
+    console.log("active card = " + this.activeCardPage)
     console.log("aktualis handcards = "+ this.handCards)
     this.activeCardShow = true;
     this.gameForm = this.formBuilder.group({
@@ -87,17 +98,7 @@ export class GameComponentComponent {
 
     });
 
-    this.gamePlayer = new GamePlayer(this.loggedinUser, this.handCards, this.activeCardPage, 0, 0);
-
-
-    // =============================== KARTYA KEZBE HUZAS ===================================
-    // this.gameService.drawCardsFromDeck(this.loggedinUser).subscribe(handCards => {
-    //   this.handCards = handCards;
-    //   this.handCards.forEach(card => {
-    //     card.picture = 'data:image/png;base64,' + card.picture;
-    //   })
-    //     ;
-    // });
+    //this.gamePlayer = new GamePlayer(this.loggedinUser, this.handCards, this.activeCardPage, 0, 0);
 
     // =========== deckek betolteses =========
     this.loginService.getUser(localStorage.getItem('loggedInUser')).subscribe({
@@ -114,14 +115,9 @@ export class GameComponentComponent {
   }
 
   showChoosenDeck(deckName: string) {
-    // ========== deck kivalasztasa es kartyak kezbe huzasa =============
-    // this.cardService.getUsersDeckCards(localStorage.getItem('loggedInUser')?? '',deckName).subscribe(deckCards => {
-    //   this.selectedDeckCards = deckCards;
-    //   console.log('cards' + deckCards)
-    // });
+
     console.log(this.selectedDeckName)
     this.selectedDeckName = deckName;
-    this.activeCardPage = new Card('', '', '');
     this.activeCardShow = false
 
 
@@ -143,16 +139,19 @@ export class GameComponentComponent {
 
   selectedCardToPlay(index: number, name: string) {
 
-    const currentGame = this.listOfAllGames.find(game => game.gameName === localStorage.getItem('currentGameName'));
-    const loggedInUser = localStorage.getItem('loggedInUser');
-    const currentPlayer = currentGame?.players.find(player => player.playerName === loggedInUser);
+    this.currentGame = this.listOfAllGames.find(game => game.gameName === localStorage.getItem('currentGameName'))
+    this.currentPlayer = this.currentGame?.players.find(player => player.playerName === this.loggedInUser)
+    this.otherPlayer = this.currentGame?.players.find(player => player.playerName !== this.loggedInUser)
 
-
+    console.log("currentgame " + this.currentGame)
+    console.log("currentPlayer " + this.currentPlayer)
+    console.log("otherPlayer " + this.otherPlayer)
+    console.log("active card = " + this.activeCardPage)
 
     //ha mar van aktiv kartyaja behelyezve akkor ne engedje 
-    if (currentPlayer?.activeCard == null) {
+    if (this.activeCardPage == null || this.activeCardPage == undefined) {
       
-      console.log("THIS IS CURRENT CARD WHEN CLICK PALY" + currentPlayer?.activeCard)
+      console.log("THIS IS CURRENT CARD WHEN CLICK PALY" + this.currentPlayer?.activeCard)
       const selectedCard = this.handCards[index];
 
       if (selectedCard) {
@@ -161,16 +160,40 @@ export class GameComponentComponent {
         console.log(selectedCard)
         console.log(this.activeCardPage)
 
-        this.gamePlayer.activeCard = this.activeCardPage;
-        this.gamePlayer.currentDeckCards = this.handCards;
 
-        this.gameService.playCard(localStorage.getItem('currentGameName') ?? '', this.gamePlayer)
+        if(this.currentPlayer){
+          this.currentPlayer.activeCard = selectedCard;
+          this.currentPlayer.currentDeckCards = this.handCards;
+        }
+
+
+
+
+        this.gameService.playCard(localStorage.getItem('currentGameName') ?? '', new GamePlayer(this.loggedInUser?? '',this.handCards,selectedCard,0,0))
           .subscribe({
             next: () => {
               console.log('sikeresen hozzaadva a DB aktiv kartyajahoz' + selectedCard);
-              console.log(this.gamePlayer)
               this.listOfAllGames.find(game => game.gameName === localStorage.getItem('currentGameName'));
               this.activeCardShow = true
+
+              console.log('currentplayer active card in playcard = ' + this.currentPlayer?.activeCard)
+              console.log('currentplayer active card in currentdeck = ' + this.currentPlayer?.currentDeckCards)
+              console.log('currentplayername = ' + this.currentPlayer)
+
+              if (this.currentPlayer?.playerName === localStorage.getItem('loggedInUser')) {
+                this.activeCardPage = this.currentPlayer.activeCard;
+              } else {
+                this.enemyActiveCard   = this.otherPlayer?.activeCard;
+              }
+
+              //irja felul a listofallgames-t, hogy mar mindket jatekos benne legyen --> igy a playgame mar uj jatekkor is elso korben ki tudja ertekelni a pontokat oldal frissites nelkul
+              this.gameService.listOfAllGamesCall().subscribe((allGames) => {
+                console.log(allGames)
+          
+          
+                this.listOfAllGames = allGames;
+              });
+              
             },
             error: (error) => {
               console.log('hiba a kartya kijatszasakor ');
@@ -217,9 +240,6 @@ export class GameComponentComponent {
     this.gameService.createNewGame(this.createGameForm.get('gameName')?.value || '', this.createGameForm.get('gamePassword')?.value || '')
       .subscribe({
         next: (data) => {
-          console.log('sikeres uj jatek krealas');
-          console.log('gamename = ' + this.createGameForm.get('gameName')?.value || '');
-          console.log('gamepw = ' + this.createGameForm.get('gamePassword')?.value || '');
           localStorage.setItem('currentGameName', this.createGameForm.get('gameName')?.value || '')
           this.showCreateGameForm = false;
           this.deckIsChosen = false
@@ -239,42 +259,49 @@ export class GameComponentComponent {
 
 
   onJoinGameButton(gameName: string) {
-    const selectedGame = this.listOfAllGames.find(game => game.gameName === gameName);
-    const loggedInUser = localStorage.getItem('loggedInUser');
-    const currentPlayer = selectedGame?.players.find(player => player.playerName === loggedInUser);
-  
-    if (selectedGame?.gamePassword !== this.listOfCurrentGames.get('password')?.value) {
+
+    this.currentGame = this.listOfAllGames.find(game => game.gameName === gameName)
+    this.currentPlayer = this.currentGame?.players.find(player => player.playerName === this.loggedInUser)
+    this.otherPlayer = this.currentGame?.players.find(player => player.playerName !== this.loggedInUser)
+
+    console.log("lsitofallgames + " + this.listOfAllGames)
+    console.log(this.currentPlayer?.playerName)
+    console.log(this.loggedInUser)
+    console.log(this.otherPlayer?.playerName)
+    console.log(this.currentGame?.gameName)
+
+    if (this.currentGame?.gamePassword !== this.listOfCurrentGames.get('password')?.value) {
       this.erromsg = 'Password is incorrect';
       return;
     }
   
-    if (selectedGame?.players.length === 1) {
+    if (this.currentGame?.players.length === 1) {
       console.log('Only 1 player in the game, connecting automatically');
   
-      if (currentPlayer?.activeCard == null) {
+      if (this.currentPlayer?.activeCard == null) {
         this.showListOfGamesForm = false;
         this.createOrCurrentlyJoinedGame = true;
       } else {
-        this.handCards = currentPlayer.currentDeckCards;
+        this.handCards = this.currentPlayer.currentDeckCards;
         this.usedDeckAssigned = true;
-        this.activeCardPage = currentPlayer.activeCard;
+        this.activeCardPage = this.currentPlayer.activeCard;
       }
   
-      localStorage.setItem('currentGameName', selectedGame.gameName);
+      localStorage.setItem('currentGameName', this.currentGame.gameName);
       console.log(localStorage.getItem('currentGameName'));
 
 
-    } else if (selectedGame?.players.length === 2) {
-      if (selectedGame.players.some(player => player.playerName === loggedInUser)) {
-        if (currentPlayer?.activeCard != null) {
-          this.activeCardPage = currentPlayer.activeCard;
+    } else if (this.currentGame?.players.length === 2) {
+      if (this.currentGame.players.some(player => player.playerName === this.loggedInUser)) {
+        if (this.currentPlayer?.activeCard != null) {
+          this.activeCardPage = this.currentPlayer.activeCard;
           console.log('ketszemelyes jatekban az aktiv felhasznalo mar valazstott kartyat' + this.activeCardPage);
         }
   
-        this.handCards = currentPlayer!.currentDeckCards;
+        this.handCards = this.currentPlayer!.currentDeckCards;
         this.showListOfGamesForm = false;
         console.log('Password is correct');
-        localStorage.setItem('currentGameName', selectedGame.gameName);
+        localStorage.setItem('currentGameName', this.currentGame.gameName);
         console.log(localStorage.getItem('currentGameName'));
       } else {
         this.erromsg = 'You are not a player in this game';
@@ -283,7 +310,7 @@ export class GameComponentComponent {
       this.erromsg = 'Game is full, cannot join';
     }
   
-    console.log(currentPlayer);
+    console.log(this.currentPlayer);
     console.log(this.activeCardPage);
   }
   
@@ -291,18 +318,21 @@ export class GameComponentComponent {
 
   playGame(){
 
-    const selectedGame = this.listOfAllGames.find(game => game.gameName === localStorage.getItem('currentGameName'));
-    const loggedInUser = localStorage.getItem('loggedInUser');
-    const otherPlayer = selectedGame?.players.find(player => player.playerName !== loggedInUser);
-
-    console.log("selected game = " + selectedGame?.gameName)
-    console.log("loggedinuser = " + loggedInUser)
-    console.log("other player game = " + otherPlayer?.playerName)
-    console.log(selectedGame?.players.length)
+    
+    this.currentGame = this.listOfAllGames.find(game => game.gameName === localStorage.getItem('currentGameName'))
+    this.currentPlayer = this.currentGame?.players.find(player => player.playerName === this.loggedInUser)
+    this.otherPlayer = this.currentGame?.players.find(player => player.playerName !== this.loggedInUser)
 
 
-    if (selectedGame?.players.length === 1){
-      if (selectedGame?.players[0].playerName === loggedInUser) {
+    console.log("selected game = " + this.currentGame?.gameName)
+    console.log("loggedinuser = " + this.loggedInUser)
+    console.log("other player game = " + this.otherPlayer?.playerName)
+    console.log("curent payer = " + this.currentPlayer )
+    console.log(this.currentGame?.players.length)
+
+
+    if (this.currentGame?.players.length === 1){
+      if (this.currentGame?.players[0].playerName === this.loggedInUser) {
         this.erromsg = "Waiting for another player to join and choose a card.";
       } else {
         this.erromsg = "Please choose a card first.";
@@ -311,25 +341,29 @@ export class GameComponentComponent {
     }
   
     //ez felesleges, mert csak akkor menti a DBbe ha valaszt egy aktiv kartyat
-    if (otherPlayer?.activeCard == null) {
+    if (this.otherPlayer?.activeCard == null) {
       this.enemyActiveCard = undefined;
       this.erromsg = 'The other player has not chosen a card yet.';
       return;
     }
   
-    if (selectedGame?.players.length === 2 && selectedGame?.players.every(player => player.activeCard)) {
+    if (this.currentGame?.players.length === 2 && this.currentGame?.players.every(player => player.activeCard)) {
       console.log("Both players have chosen a card!");
-      this.enemyActiveCard = otherPlayer.activeCard;
+      this.enemyActiveCard = this.otherPlayer.activeCard;
       this.enemyActiveCardShow = true;
       // jatek pontok szamitasa.
 
-      this.gameService.playGame(selectedGame.gameName)
+      this.gameService.playGame(this.currentGame.gameName)
       .subscribe({
         next: (responseGameState) => {
           this.playGameState = responseGameState;
           console.log(typeof(responseGameState))
           this.showNextRoundButton = true;
           this.showGameState = true;
+
+          if(this.currentPlayer!.gamePoints >= 5 || this.otherPlayer!.gamePoints >= 5){
+            this.showNextRoundButton = false;
+          }
         },
         error: (err) => {
           console.log('nem sikerult game');
@@ -337,13 +371,6 @@ export class GameComponentComponent {
           console.log(err);
         },
       });
-      this.gameService.playGame(selectedGame.gameName)
-      .subscribe(result => {
-        this.playGameState = result;
-        console.log('Result:', result);
-        console.log('playGameState:', this.playGameState);
-      });
-    
 
       this.playButtonHit = true;
       this.showNextRoundButton = true;
@@ -354,15 +381,15 @@ export class GameComponentComponent {
   }
 
   nextRound(){
-    const selectedGame = this.listOfAllGames.find(game => game.gameName === localStorage.getItem('currentGameName'));
+    this.currentGame = this.listOfAllGames.find(game => game.gameName === localStorage.getItem('currentGameName'))
+    this.currentGame?.players.find(player => player.playerName === this.loggedInUser)
 
-    if (!selectedGame) {
+    if (!this.currentGame) {
       console.log('No game selected!');
       return;
     }
 
-    this.activeCardPage = new Card('','','')
-    this.enemyActiveCard = new Card('','','')
+    this.enemyActiveCard = undefined
     this.showNextRoundButton = false;
     this.activeCardShow = false;
     this.showGameState = false;
@@ -370,10 +397,13 @@ export class GameComponentComponent {
 
     this.enemyActiveCardShow = false;
 
-      this.gameService.deleteActiveCardsForNextRound(selectedGame.gameName)
+      this.gameService.deleteActiveCardsForNextRound(this.currentGame.gameName)
       .subscribe({
         next: () => {
-          console.log('Active cards deleted here' + selectedGame.gameName);
+          console.log('Active cards deleted here' + this.currentGame?.gameName);
+          this.enemyActiveCard = undefined
+          this.activeCardPage = undefined;
+          this.erromsg = "wait other player to choose"
         },
         error: (err) => {
           console.log('Active cards NOT deleted here');

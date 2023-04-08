@@ -123,7 +123,7 @@ export class CardListComponentComponent implements OnInit {
 
     
 
-    if (this.deckForm.get('deckName') && this.newDeckCards.length >= 5) {
+    if (this.deckForm.get('deckName') && this.newDeckCards.length >= 5 && this.newDeckCards.length <= 10)  {
 
       this.cardService.createDeck(this.loggedinUser, this.deckForm.get('deckName')?.value ?? '', this.newDeckCardsString)
         .subscribe({
@@ -135,7 +135,7 @@ export class CardListComponentComponent implements OnInit {
           },
           error: (err) => {
             console.log('failed to send deck');
-            this.errorMsg = "fill the deckname and select at least 20 cards"
+            this.errorMsg = "fill the deckname and select from 5 to 10 cards"
 
             console.log(err);
           },

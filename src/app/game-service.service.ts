@@ -43,7 +43,6 @@ export class GameService {
 
   playCard(gameName: string, gamePlayer: GamePlayer) {
     const url = `${this.url}/playCard/${gameName}`;
-
     return this.http.put(url, gamePlayer);
 
   }
@@ -61,6 +60,6 @@ export class GameService {
   }
 
   deleteActiveCardsForNextRound(gameName: string) {
-    return this.http.put(`${this.url}/${gameName}/deleteActiveCardsForNextRound`, {});
+    return this.http.put(`${this.url}/${gameName}/deleteActiveCardsForNextRound`, {},{responseType:'text'});
   }
 }
