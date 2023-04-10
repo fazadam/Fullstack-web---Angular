@@ -1,6 +1,15 @@
 
 
+@font-face {
+  font-family: 'Ringbearer';
+  src: url('Ringbearer Medium 500.ttf') format('truetype');
+  font-weight: 500;
+}
 
+*{
+  font-family: 'Ringbearer';
+  font-weight: bold;
+} 
 
   body{
     height: 100%;
@@ -116,15 +125,5 @@ h2,h1{
        margin-bottom: 15px;
        width: auto;
        height: auto;
-
-    }
-
-    #newGameContainer{
-border: 2px solid red;
-
-    }
-
-    #newGameForm{
-      border: 2px solid red;
 
     }
